@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@model SIDPSF.Features.SharedMVC.BaseCrudModel
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="card mb-1">
+    <div class="accordion" id="auditDataAccordion">
+        <div class="accordion-item">
+            <h5 class="accordion-header" id="headingAuditData">
+                <button class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAuditData" aria-expanded="false" aria-controls="collapseAuditData">
+                    @ResourceRepo.GetResourceByName("AuditData")
+                </button>
+            </h5>
+            <div id="collapseAuditData" class="accordion-collapse collapse" aria-labelledby="headingAuditData" data-bs-parent="#auditDataAccordion">
+                <div class="accordion-body">
+                    <form class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="_IdUserOperation" class="form-label"></label>
+                            <select class="form-select" asp-for="_IdUserOperation" asp-items="@(new SelectList(Model._IdUserOperationDdl, "Id", "Description"))" disabled>
+                                <option value="">@Common.DdlEmpty</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="_IdOperation" class="form-label"></label>
+                            <select class="form-select" asp-for="_IdOperation" asp-items="@(new SelectList(Model._IdOperationDdl, "Id", "Description"))" disabled>
+                                <option value="">@Common.DdlEmpty</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="_OperationDate" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_OperationDate" disabled>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="_CreatedOn" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_CreatedOn" disabled>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="_CreatedBy" class="form-label"></label>
+                            <select class="form-select" asp-for="_CreatedBy" asp-items="@(new SelectList(Model._CreatedByDdl, "Id", "Description"))" disabled>
+                                <option value="">@Common.DdlEmpty</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="_LastUpdatedOn" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_LastUpdatedOn" disabled>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="_UpdatedBy" class="form-label"></label>
+                            <select class="form-select" asp-for="_UpdatedBy" asp-items="@(new SelectList(Model._UpdatedByDdl, "Id", "Description"))" disabled>
+                                <option value="">@Common.DdlEmpty</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="_IpAddress" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_IpAddress" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="_GlobalAccessTrackingGUID" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_GlobalAccessTrackingGUID" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="_RowGuid" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="_RowGuid" readonly>
+                        </div>
+                        <div class="col-md-1">
+                            <label asp-for="_Deleted" class="form-label"></label>
+                            <div>
+                                <input class="form-check-input large-checkbox" type="checkbox" asp-for="_Deleted" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="_IsErrorLog" class="form-label d-block"></label>
+                            <div>
+                                <input class="form-check-input large-checkbox" type="checkbox" asp-for="_IsErrorLog" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <label asp-for="_LogContent" class="form-label"></label>
+                            <textarea class="form-control scrollable-textarea limited-resize-textarea" asp-for="_LogContent" disabled></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="SysStartTime" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="SysStartTime" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="SysEndTime" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="SysEndTime" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

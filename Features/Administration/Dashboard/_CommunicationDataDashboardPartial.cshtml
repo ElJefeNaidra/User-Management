@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@model SIDPSF.Features.Administration.Dashboard.DashboardModel
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+
+<div class="row">
+    <!--TotalNumberOfSMSSent-->
+    <div class="col-md-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="text-muted fw-medium"><label style="white-space:normal" asp-for="TotalNumberOfSMSSent"></label></p>
+                        <h3 class="mb-0">@Model.TotalNumberOfSMSSent</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                            <span class="avatar-title rounded-circle bg-secondary">
+                                <i class="bx bxs-message font-size-22"></i>
+                                <i class="bx bx-check font-size-14"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TotalNumberOfSMSNotSent-->
+    <div class="col-md-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="text-muted fw-medium"><label style="white-space: nowrap;" asp-for="TotalNumberOfSMSNotSent"></label></p>
+                        <h3 class="mb-0">@Model.TotalNumberOfSMSNotSent</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                            <span class="avatar-title rounded-circle bg-secondary">
+                                <i class="bx bxs-message font-size-22"></i>
+                                <i class="bx bx-x font-size-14"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TotalNumberOfEmailSent-->
+    <div class="col-md-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="text-muted fw-medium"><label style="white-space: nowrap;" asp-for="TotalNumberOfEmailSent"></label></p>
+                        <h3 class="mb-0">@Model.TotalNumberOfEmailSent</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                            <span class="avatar-title rounded-circle bg-secondary">
+                                <i class="bx bx-envelope font-size-22"></i>
+                                <i class="bx bx-check font-size-14"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TotalNumberOfEmailNotSent-->
+    <div class="col-md-3">
+        <div class="card mini-stats-wid">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="text-muted fw-medium"><label style="white-space: nowrap;" asp-for="TotalNumberOfEmailNotSent"></label></p>
+                        <h3 class="mb-0">@Model.TotalNumberOfEmailNotSent</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 align-self-center">
+                        <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                            <span class="avatar-title rounded-circle bg-secondary">
+                                <i class="bx bx-envelope font-size-22"></i>
+                                <i class="bx bx-x font-size-14"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

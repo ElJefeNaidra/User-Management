@@ -1,0 +1,50 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName("MsgAccessDenied");
+}
+
+<div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden border border-secondary">
+                    <div class="bg-gradient bg-secondary">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Ensures the column takes full width -->
+                                <!-- Flex container to align items to extreme ends -->
+                                <div class="d-flex justify-content-between align-items-center p-4">
+                                    <!-- Individual divs for each image with padding -->
+                                    <div class="p-2">
+                                        <img src="~/assets/images/stema.png" alt="" height="50">
+                                    </div>
+                                    <div class="p-2">
+                                        <img src="~/assets/images/logo-light.png" alt="" height="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="p-2">
+                            <div class="text-danger" style="text-align:center;">
+                                <h4 class="text-danger">@Html.Raw(@TempData["ErrorMessages"].ToString())</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "kendo-ui-core@2014.1.416",
+      "destination": "wwwroot/lib/kendo-ui-core/"
+    },
+    {
+      "library": "inputmask@4.0.9",
+      "destination": "wwwroot/lib/inputmask/"
+    },
+    {
+      "library": "jquery-validate@1.20.0",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "library": "exceljs@4.4.0",
+      "destination": "wwwroot/lib/exceljs/"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+﻿@using SIDPSF.Common
+<!-- ========== Left Sidebar Start ========== -->
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Check if JavaScript is enabled -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=/NoJScript" />
+    </noscript>
+
+    <!-- Header -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDPSFF | @ViewBag.WindowTitle</title>
+    <meta content="SIDPSFF" name="description" />
+    <meta content="SIDPSFF" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+
+    <script src="~/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
+
+    <link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" />
+    <!-- Icons Css -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" />
+    <!-- App Css-->
+    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+@*     <style>
+        body {
+            background-image: url('assets/images/background.jpg');
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+        }
+    </style> *@
+
+</head>
+
+<body>
+    @* NO SCRIPT TAG NEEDS TO STAY HERE *@
+    <noscript>
+        <div style="color: red; background-color: yellow; text-align: center;">
+            This application requires JavaScript to be enabled.
+        </div>
+    </noscript>
+    @await Html.PartialAsync("~/Features/_Layout_TopbarSimple.cshtml")
+
+    @RenderBody()
+
+    <footer style="margin-left: 30px;position: absolute;bottom: 0;padding-bottom: 15px;">
+        <div>
+            <div>
+                @ResourceRepo.GetResourceByName("FooterSystemName")<br />
+                ©<script>document.write(new Date().getFullYear())</script> @ResourceRepo.GetResourceByName("FooterInstitutionName")<br />
+            </div>
+        </div>
+    </footer>
+
+    @* PREVENT ENTER KEY FROM SUBMITTING THE FORMS *@
+    <script>
+        $(document).ready(function () {
+            $('form').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

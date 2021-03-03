@@ -1,0 +1,102 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Features
+@using SIDPSF.Features.Administration.User.UserLogin
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model UserLoginModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_BlankLayout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName("Login");
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName("Login");
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+@functions {
+    private void OrderedList(string Key)
+    {
+        TempData.Remove(Key);
+        return;
+    }
+}
+
+<div class="account-pages my-5 pt-sm-5" style="margin-top: 6rem !important;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden border border-secondary">
+                    <div class="bg-gradient bg-secondary">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Ensures the column takes full width -->
+                                <!-- Flex container to align items to extreme ends -->
+                                <div class="d-flex justify-content-between align-items-center p-4">
+                                    <!-- Individual divs for each image with padding -->
+                                    <div class="p-2">
+                                        <img src="~/assets/images/stema.png" alt="" height="50">
+                                    </div>
+                                    <div class="p-2">
+                                        <img src="~/assets/images/logo-light.png" alt="" height="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="p-2">
+                            <form asp-controller="UserLogin" asp-action="Login" method="post" id="form">
+                                <fieldset>
+                                    <!-- #region Username -->
+                                    <div class="mb-3">
+                                        <label class="col-sm-6 col-form-label" asp-for="Username"></label>
+                                        <input asp-for="Username" id="Username" type="text" class="form-control" />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+
+                                    </div>
+
+                                    <!-- #region Password -->
+                                    <div class="mb-3">
+                                        <label class="col-sm-6 col-form-label" asp-for="Password"></label>
+
+                                        <input asp-for="Password" id="Password" type="password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+
+                                    <br />
+                                    <div class="row g-3" style="text-align: right;">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-log-in label-icon"></i>@ResourceRepo.GetResourceByName("btnLogin")</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                        @if (TempData["ErrorMessages"] != null)
+                        {
+                            <text>
+                                <br />
+                                <div class="text-danger">
+                                    @Html.Raw(@TempData["ErrorMessages"].ToString())
+                                    @{
+                                        OrderedList("ErrorMessages");
+                                    }
+                                </div>
+                                <br />
+                            </text>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

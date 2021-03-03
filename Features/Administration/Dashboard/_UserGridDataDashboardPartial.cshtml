@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using System.Data
+@model SIDPSF.Features.Administration.Dashboard.DashboardModel
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Card for User Logged In Data -->
+        <div class="card mb-1">
+            <!-- Card Header -->
+            <div class="card-header fw-bold text-uppercase">
+                @ResourceRepo.GetResourceByName("LoggedInUsers")
+            </div>
+            <div class="card-body">
+                @if (Model.UserLoggedInData != null && Model.UserLoggedInData.Rows.Count > 0)
+                {
+                    <div class="table-responsive scrollable-table-container">
+                        <table class="table table-bordered table-striped border-primary align-middle table-nowrap mb-0">
+                            <thead class="table-light sticky-header">
+                                <tr>
+                                    <th></th>
+                                    <th>@ResourceRepo.GetResourceByName("UserFullName")</th>
+                                    <th>@ResourceRepo.GetResourceByName("Username")</th>
+                                    <th>@ResourceRepo.GetResourceByName("DateLoggedIn")</th>
+                                    <th>@ResourceRepo.GetResourceByName("_IpAddress")</th>
+                                    <th>@ResourceRepo.GetResourceByName("CurrentSessionID")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow row in Model.UserLoggedInData.Rows)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(row["Buttons"].ToString())</td>
+                                        <td>@row["UserFullName"]</td>
+                                        <td>@row["Username"]</td>
+                                        <td>@row["DateLoggedIn"]</td>
+                                        <td>@row["_IpAddress"]</td>
+                                        <td>@row["CurrentSessionID"]</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p>@SIDPSF._Resources.Grid.NoRecords</p>
+                }
+            </div>
+        </div>
+
+        <!-- Card for Failed Logins Data -->
+        <div class="card mb-1">
+            <!-- Card Header -->
+            <div class="card-header fw-bold text-uppercase">
+                @ResourceRepo.GetResourceByName("FailedLoginAttempts")
+            </div>
+            <div class="card-body">
+                @if (Model.FailedLogins != null && Model.FailedLogins.Rows.Count > 0)
+                {
+                    <div class="table-responsive scrollable-table-container">
+                        <table class="table table-bordered table-striped border-primary align-middle table-nowrap mb-0">
+                            <thead class="table-light sticky-header">
+                                <tr>
+                                    <th></th>
+                                    <th>@ResourceRepo.GetResourceByName("DateOfAttempt")</th>
+                                    <th>@ResourceRepo.GetResourceByName("UserFullName")</th>
+                                    <th>@ResourceRepo.GetResourceByName("Username")</th>
+                                    <th>@ResourceRepo.GetResourceByName("Password")</th>
+                                    <th>@ResourceRepo.GetResourceByName("IpAddress")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow row in Model.FailedLogins.Rows)
+                                {
+                                    <tr>
+                                        <td>@Html.Raw(row["Buttons"].ToString())</td>
+                                        <td>@row["DateOfAttempt"]</td>
+                                        <td>@row["UserFullName"]</td>
+                                        <td>@row["Username"]</td>
+                                        <td>@row["Password"]</td>
+                                        <td>@row["IpAddress"]</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p>@SIDPSF._Resources.Grid.NoRecords</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .scrollable-table-container {
+        max-height: 400px; /* Adjust based on your needs */
+        overflow-y: auto;
+    }
+
+    .sticky-header th {
+        position: sticky;
+        top: 0;
+        z-index: 1020; /* Higher than the table rows to stay on top */
+    }
+</style>

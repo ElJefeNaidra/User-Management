@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using static SIDPSF.Common.DataAccess.DBContext
+@model SIDPSF.Features.SharedMVC.BaseCrudModel;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@{
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName(Model.WindowTitle);
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName(Model.FormTitle);
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName(Model.BreadCrumbRoot);
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName(Model.BreadCrumbTitle);
+}

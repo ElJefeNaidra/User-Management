@@ -1,0 +1,63 @@
+﻿@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@model SIDPSF.Features.Administration.Authorisation.AuthorisationModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName("AuthorisationTitle");
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName("AuthorisationTitle");
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName("Administration");
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName("Authorisation");
+}
+
+<div class="card mb-1">
+    <div class="card-body">
+        <h3 class="card-title">@ResourceRepo.GetResourceByName("Authorisation")</h3>
+        <p class="card-title-desc">
+            @ResourceRepo.GetResourceByName("AuthorisationPageDescription")
+        </p>
+
+        <div class="card mb-1">
+            <div class="card-body">
+                <h5 class="card-title">@ResourceRepo.GetResourceByName("AuthorisationLegend")</h5>
+                <br /><i class="fa fa-eye" style=" color: green;" aria-hidden="true"></i> - @ResourceRepo.GetResourceByName("AuthorisationIsMenuItemYes")
+                <br /><i class="fa fa-eye-slash" style=" color: darkred;" aria-hidden="true"></i> - @ResourceRepo.GetResourceByName("AuthorisationIsMenuItemNo")
+                <br /><i class="fa fa-bolt" style=" color: green;" aria-hidden="true"></i> - @ResourceRepo.GetResourceByName("AuthorizationTreeIsControllerAction")
+                <br /><i class="fa fa-bolt" style=" color: darkred;" aria-hidden="true"></i> - @ResourceRepo.GetResourceByName("AuthorizationTreeIsControllerActionNo")
+            </div>
+        </div>
+
+
+        <div class="card mb-1">
+            <div class="card-body">
+                <h5 class="card-title">@ResourceRepo.GetResourceByName("AuthorisationTree")</h5>
+                <br />
+                @Html.Raw(Model.TreeView)
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Remove default bullets */
+    ul {
+        list-style-type: none;
+    }
+
+    /* Remove margins and padding from the parent ul */
+    #ul {
+        margin: 0;
+        padding: 0;
+    }
+    .btn-custom {
+        width: 18px !important;
+        height: 18px !important;
+        font-size: x-small;
+        text-align: center;
+        padding-left: 4px;
+        margin-bottom: 5px;
+        padding-top: 1px;
+    }
+</style>

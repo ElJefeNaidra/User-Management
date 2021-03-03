@@ -1,0 +1,563 @@
+@using SIDPSF.Common.StringLocalisation
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model SIDPSF.Features.Administration.User.UserModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName(Model.WindowTitle);
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName(Model.FormTitle);
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName(Model.BreadCrumbRoot);
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName(Model.BreadCrumbTitle);
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+@{
+    if (Model.crudOp == CrudOp.Create || Model.crudOp == CrudOp.Update || Model.crudOp == CrudOp.Enable || Model.crudOp == CrudOp.Disable)
+    {
+        <text>
+            <div class="row justify-content-center">
+                <div class="col-sm-9">
+        </text>
+    }
+    else
+    {
+        <text>
+            <div class="row">
+                <div class="col-sm-6">
+        </text>
+    }
+}
+
+<div class="card mb-1">
+    <div class="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                @ResourceRepo.GetResourceByName("UserData")
+            </h2>
+            <div class="accordion-collapse">
+                <div class="accordion-body">
+                    <form asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" method="post" id="form" enctype="multipart/form-data">
+
+                        <input type="hidden" id="_RowTimestamp" asp-for="_RowTimestamp" />
+                        <input type="hidden" id="_RowGuid" asp-for="_RowGuid" />
+                        <input type="hidden" id="IdUser" asp-for="IdUser" />
+
+                        <fieldset>
+
+                            <!-- #region IdOrganisation -->
+                            <div class="row mb-4" style="display:@Model.display_IdOrganisation;">
+                                <label class="col-sm-3 col-form-label" asp-for="IdOrganisation"></label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="IdOrganisation" asp-for="IdOrganisation" asp-items="@(new SelectList(Model.IdOrganisationDdl, "Id", "Description"))" disabled="@Model.disable_IdOrganisation">
+                                        <option value="">@Common.DdlChoose</option>
+                                    </select>
+                                    <span asp-validation-for="IdOrganisation" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region PersonalNo -->
+                            <div class="row mb-4" style="display:@Model.display_PersonalNo;">
+                                <label class="col-sm-3 col-form-label" asp-for="PersonalNo"></label>
+                                <div class="col-sm-9">
+                                    <div style="display:inline-block">
+                                        <input asp-for="PersonalNo" id="PersonalNo" class="form-control" type="text" readonly="@(Model.disable_PersonalNo ? "readonly" : null)" />
+                                        <span asp-validation-for="PersonalNo" class="text-danger"></span>
+                                    </div>
+                                    @* @if (Model.crudOp == CrudOp.Create)
+                                      {
+                                          <div style="display:inline-block;vertical-align:middle!important;">
+                                              <button type="button" class="btn btn-primary" id="btnGetPersonalNoData">
+                                                  <i class="bx bx-search label-icon" style="vertical-align: middle;font-size:large"></i>
+                                              </button>
+                                              <button type="button" class="btn btn-danger" id="btnClearPersonalNo" style="display:none;">
+                                                  <i class="bx bx-x-circle label-icon" style="vertical-align: middle;font-size:large"></i>
+                                              </button>
+                                              <span id="PersonalNoErrorMessage" class="text-danger"></span>
+                                          </div>
+                                      }*@
+
+                                </div>
+                            </div>
+
+                            <!-- #region FirstName -->
+                            <div class="row mb-4" style="display:@Model.display_FirstName;">
+                                <label class="col-sm-3 col-form-label" asp-for="FirstName"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="FirstName" id="FirstName" type="text" class="form-control" readonly="@(Model.disable_FirstName ? "readonly" : null)" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region LastName -->
+                            <div class="row mb-4" style="display:@Model.display_LastName;">
+                                <label class="col-sm-3 col-form-label" asp-for="LastName"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="LastName" id="LastName" type="text" class="form-control" readonly="@(Model.disable_LastName ? "readonly" : null)" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region FileUploadPersonalData -->
+                            @if (Model.crudOp == CrudOp.Create)
+                            {
+                                <div class="row mb-4">
+                                    <label class="col-sm-3 col-form-label" asp-for="FileUploadPersonalDataInterface"></label>
+                                    <div class="col-sm-9">
+                                        <input id="FileUploadPersonalData" asp-for="FileUploadPersonalDataInterface" type="file" class="form-control" disabled="@(Model.disable_FileUploadPersonalData ? "disabled" : null)" />
+                                        <span asp-validation-for="FileUploadPersonalDataInterface" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- #region FileUploadPersonalDataUpdate -->
+                            @if (Model.crudOp == CrudOp.Update)
+                            {
+                                <div class="row mb-4">
+                                    <label class="col-sm-3 col-form-label" asp-for="FileUploadPersonalDataUpdateInterface"></label>
+                                    <div class="col-sm-9">
+                                        <input id="FileUploadPersonalDataUpdate" asp-for="FileUploadPersonalDataUpdateInterface" type="file" class="form-control" />
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.FileUploadPersonalData != null)
+                            {
+                                <div class="row mb-4">
+                                    <label class="col-sm-3 col-form-label" asp-for="FileUploadPersonalData"></label>
+                                    <div class="col-sm-9">
+                                        <button type="button" id="btnFileUploadPersonalDataGet" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-download label-icon"></i>@ResourceRepo.GetResourceByName("btnDownload")</button>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- #region Email -->
+                            <div class="row mb-4" style="display:@Model.display_Email;">
+                                <label class="col-sm-3 col-form-label" asp-for="Email"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Email" id="Email" type="text" class="form-control" disabled="@(Model.disable_Email ? "disabled" : null)" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region PhoneNo -->
+                            <div class="row mb-4" style="display:@Model.display_PhoneNo;">
+                                <label class="col-sm-3 col-form-label" asp-for="PhoneNo"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="PhoneNo" id="PhoneNo" type="text" class="form-control" disabled="@(Model.disable_PhoneNo ? "disabled" : null)" />
+                                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <!-- #region WorkTitle -->
+                            <div class="row mb-4" style="display:@Model.display_WorkTitle;">
+                                <label class="col-sm-3 col-form-label" asp-for="WorkTitle"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="WorkTitle" id="WorkTitle" type="text" class="form-control" disabled="@(Model.disable_WorkTitle ? "disabled" : null)" />
+                                    <span asp-validation-for="WorkTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region IdLanguageOfUser -->
+                            <div class="row mb-4" style="display:@Model.display_IdLanguageOfUser;">
+                                <label class="col-sm-3 col-form-label" asp-for="IdLanguageOfUser"></label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="IdLanguageOfUser" asp-for="IdLanguageOfUser" asp-items="@(new SelectList(Model.IdLanguageOfUserDdl, "Id", "Description"))" disabled="@Model.disable_IdLanguageOfUser">
+                                        <option value="">@Common.DdlChoose</option>
+                                    </select>
+                                    <span asp-validation-for="IdLanguageOfUser" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region Username -->
+                            <div class="row mb-4" style="display:@Model.display_Username;">
+                                <label class="col-sm-3 col-form-label" asp-for="Username"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Username" id="Username" type="text" class="form-control" disabled="@(Model.disable_Username ? "disabled" : null)"
+                                           oninput="enforceCharacterRestrictions(this)"
+                                           onpaste="preventPaste(event)" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region IdAuthorisationArray -->
+                            <div class="row mb-4" style="display:@Model.display_IdAuthorisationArray;">
+                                <label class="col-sm-3 col-form-label" asp-for="IdAuthorisationArrayValues"></label>
+                                <div class="col-sm-9">
+                                    <select id="IdAuthorisationArray" asp-for="IdAuthorisationArrayValues" asp-items="Model.IdAuthorisationArrayList" class="form-control" multiple="multiple" disabled="@(Model.disable_IdAuthorisationArray ? "disabled" : null)"></select>
+                                    <span asp-validation-for="IdAuthorisationArrayValues" class="text-danger"></span>
+                                    <input type="hidden" asp-for="IdAuthorisationArray" />
+                                </div>
+                            </div>
+
+                            @if (Model.crudOp == CrudOp.Enable || Model.crudOp == CrudOp.Disable)
+                            {
+                                <!-- #region EnabledDisabledComment -->
+                                <div class="row mb-4" style="display:@Model.display_EnabledDisabledComment;">
+                                    <label class="col-sm-3 col-form-label" asp-for="EnabledDisabledComment"></label>
+                                    <div class="col-sm-9">
+                                        <textarea asp-for="EnabledDisabledComment"
+                                                  class="form-control scrollable-textarea limited-resize-textarea"
+                                                  disabled="@(Model.disable_EnabledDisabledComment ? "disabled" : null)"
+                                                  id="EnabledDisabledComment"></textarea>
+                                        <span asp-validation-for="EnabledDisabledComment" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            }
+
+                            @await Html.PartialAsync("~/Features/_SharedMVC/_ButtonsCRUDPartial.cshtml")
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+@{
+    if (Model.crudOp == CrudOp.Read || Model.crudOp == CrudOp.ReadHistory)
+    {
+        <div class="col-sm-6">
+            <div class="card mb-0">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                            @ResourceRepo.GetResourceByName("UserStatusData")
+                        </h2>
+                        <div class="accordion-collapse">
+                            <div class="accordion-body" style="padding: 4px;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered border-primary mb-0">
+                                        <!-- IsSuperAdmin -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="IsSuperAdmin"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="IsSuperAdmin" class="form-check-input large-checkbox" asp-for="IsSuperAdmin" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- IsSystemProceess -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="IsSystemProceess"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="IsSystemProceess" class="form-check-input large-checkbox" asp-for="IsSystemProceess" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- PasswordNeedsChange -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="PasswordNeedsChange"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="PasswordNeedsChange" class="form-check-input large-checkbox" asp-for="PasswordNeedsChange" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- TemporaryPasswordText -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="TemporaryPasswordText"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="TemporaryPasswordText" class="form-control form-control-table">@Model.TemporaryPasswordText</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- IsLoggedIn -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="IsLoggedIn"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="IsLoggedIn" class="form-check-input large-checkbox" asp-for="IsLoggedIn" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- DateLoggedIn -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="DateLoggedIn"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="DateLoggedIn" class="form-control form-control-table">@Model.DateLoggedIn</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- CurrentSessionID -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="CurrentSessionID"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="CurrentSessionID" class="form-control form-control-table">@Model.CurrentSessionID</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- IsLockedOut -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="IsLockedOut"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="IsLockedOut" class="form-check-input large-checkbox" asp-for="IsLockedOut" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- DateLockedOut -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="DateLockedOut"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="DateLockedOut" class="form-control form-control-table">@Model.DateLockedOut</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- DateLockOutExpired -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="DateLockOutExpired"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="DateLockOutExpired" class="form-control form-control-table">@Model.DateLockOutExpired</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- IsEnabled -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="IsEnabled"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <input type="checkbox" id="IsEnabled" class="form-check-input large-checkbox" asp-for="IsEnabled" disabled />
+                                            </td>
+                                        </tr>
+
+                                        <!-- EnabledDisabledComment -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="EnabledDisabledComment"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="EnabledDisabledComment" class="form-control form-control-table">@Model.EnabledDisabledComment</span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- DateEnabledDisabled -->
+                                        <tr>
+                                            <td class="label-column">
+                                                <label class="col-form-label" asp-for="DateEnabledDisabled"></label>
+                                            </td>
+                                            <td class="content-column">
+                                                <span id="DateEnabledDisabled" class="form-control form-control-table">@Model.DateEnabledDisabled</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+</div>
+
+@{
+    if (Model.crudOp == CrudOp.Read)
+    {
+        @await Html.PartialAsync("~/Features/_SharedMVC/_OperationsPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_AuditDataPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_HistoryGridPartial.cshtml")
+    }
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_DetailsModalPartial.cshtml")
+
+
+<script>
+    $(document).ready(function () {
+        $("#PhoneNo").inputmask("999199999", { // Adjusted mask
+            placeholder: "#",
+            definitions: {
+                '1': {
+                    validator: "[1-9]", // 4th digit must be between 1 and 9
+                    cardinality: 1
+                },
+                '9': {
+                    validator: "[0-9]", // Other digits can be between 0 and 9
+                    cardinality: 1
+                }
+            }
+        }).on('input', function () {
+            var value = $(this).val().replace(/#/g, ''); // Remove placeholder characters
+            if (value.length == 3) { // Check after the prefix is entered
+                var prefix = value.substr(0, 3);
+                var validPrefixes = ["043", "044", "045", "046", "047", "048", "049"];
+                if (!validPrefixes.includes(prefix)) {
+                    $(this).val('');
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('IdOrganisation').on('change', function (e) {
+            $('IdOrganisation').valid();
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#PersonalNo").inputmask("9999999999", {
+            placeholder: "#",
+            definitions: {
+                '9': {
+                    validator: "[0-9]",
+                    cardinality: 1
+                }
+            }
+        }).on('input', function () {
+            var value = $(this).val().replace(/#/g, ''); // Remove placeholder characters
+            if (value.length >= 2) { // Only check after two digits are entered
+                var firstTwo = parseInt(value.substr(0, 2));
+                if (firstTwo < 10 || firstTwo > 29) {
+                    $(this).val('');
+                }
+            }
+        });
+    });
+
+    // $(document).ready(function () {
+    //     $('#btnGetPersonalNoData').click(function () {
+    //         // Validate only the PersonalNo field
+    //         var PersonalNoElement = $('#PersonalNo');
+    //         if (!PersonalNoElement.valid()) {
+    //             return; // Exit if PersonalNo validation fails
+    //         }
+
+    //         var PersonalNo = PersonalNoElement.val();
+    //         $.ajax({
+    //             url: '/Person/GetData',
+    //             type: 'POST',
+    //             data: { PersonalNo: PersonalNo },
+    //             success: function (data) {
+    //                 // Handle response
+    //                 console.log(data);
+    //                 // Disable input and toggle buttons
+    //                 PersonalNoElement.prop('disabled', true);
+    //                 $('#btnGetPersonalNoData').hide();
+    //                 $('#btnClearPersonalNo').show();
+    //             },
+    //             error: function (error) {
+    //                 // Handle error
+    //                 console.log(error);
+    //             }
+    //         });
+    //     });
+
+    //     $('#btnClearPersonalNo').click(function () {
+    //         // Clear and re-enable the PersonalNo input
+    //         var PersonalNoElement = $('#PersonalNo');
+    //         var PersonalNoErrorMessage = $('#PersonalNoErrorMessage');
+
+    //         PersonalNoElement.val('').prop('disabled', false);
+    //         PersonalNoErrorMessage.text('');
+
+    //         var FirstName = $('#FirstName');
+    //         FirstName.val('').prop('disabled', false);
+    //         FirstName.val('').prop('readOnly', true);
+
+    //         var LastName = $('#LastName');
+    //         LastName.val('').prop('disabled', false);
+    //         LastName.val('').prop('readOnly', true);
+
+    //         // Toggle buttons
+    //         $('#btnGetPersonalNoData').show();
+    //         $('#btnClearPersonalNo').hide();
+    //         // Reset validation for PersonalNo
+    //         var validator = PersonalNoElement.closest("form").validate();
+    //         validator.resetForm();
+    //         PersonalNoElement.removeClass('input-validation-error');
+    //     });
+    // });
+
+</script>
+
+<script>
+    function enforceCharacterRestrictions(element) {
+        let value = element.value;
+        // Replace characters that are not A-Z, a-z, 0-9, or '.'
+        value = value.replace(/[^a-zA-Z0-9.]/g, '');
+        // Convert to lowercase
+        value = value.toLowerCase();
+        // Update the input field
+        element.value = value;
+    }
+
+    function preventPaste(event) {
+        // Prevent pasting into the input field
+        event.preventDefault();
+    }
+</script>
+
+
+<script>
+    document.getElementById('btnFileUploadPersonalDataGet').addEventListener('click', function () {
+        var documentGUID = '@Model.FileUploadPersonalData'; // Assuming DocumentGUID is stored in FileUploadPersonalData
+        var url = '@Url.Action("Download", "Document")' + '?Document=' + '@Model.FileUploadPersonalData';
+
+        // Open in a new tab or window
+        window.open(url, '_blank');
+
+        // Alternatively, to force download (if server-side Content-Disposition is set to attachment)
+        // window.location.href = url;
+    });
+</script>
+
+<style>
+    .form-control-table {
+        background: transparent;
+        border: none;
+        padding-left: 1px;
+    }
+
+    .label-column {
+        width: 50%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    .content-column {
+        width: 50%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 3px !important;
+        padding-bottom: 1px !important;
+    }
+
+</style>

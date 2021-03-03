@@ -1,0 +1,123 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.Grid
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@model SIDPSF.Features.SharedMVC.BaseCrudModel;
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="card mb-1">
+    <div class="accordion" id="HistoryDataAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingHistoryData">
+                <button class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistoryData" aria-expanded="false" aria-controls="collapseHistoryData">
+                    @ResourceRepo.GetResourceByName("HistoryData")
+                </button>
+            </h2>
+            <div id="collapseHistoryData" class="accordion-collapse collapse" aria-labelledby="headingHistoryData" data-bs-parent="#HistoryDataAccordion">
+                <div class="accordion-body">
+                    @(Html.Kendo().Grid<dynamic>(Model.GetDynamicHistoryData())
+                        .Name("gridHistory")
+                        .Events(events => events.DataBound("onDataBound"))
+                        .Excel(excel => excel
+                        .FileName("History_Grid_Export.xlsx")
+                        .AllPages(false)
+                        .ProxyURL(@Url.Action("Excel_Export_Save"))
+                        )
+                        .Scrollable(scrollable => scrollable.Height("300px"))
+                        .ToolBar(tools =>
+                        {
+                            tools.Excel().Text(Grid.Excel);
+                        })
+
+                        .Columns(columns =>
+                        {
+                            columns.GenerateGridColumns(Model.HistoryData, ResourceRepo);
+                        })
+                        .AllowCopy(true)
+                        .NoRecords(true)
+                        .Messages(messages => { messages.NoRecords(Grid.NoRecords); })
+                        .LoaderType(GridLoaderType.LoadingPanel)
+                        .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .ServerOperation(false)
+                        .Events(events => events.Error("onError"))
+                        )
+                        .Filterable(f => f.Extra(false).Operators(o => o.ForString(configurator => configurator.Clear().StartsWith(Grid.StartsWith).Contains(Grid.Contains).IsNullOrEmpty(Grid.IsNullOrEmpty))))
+                        .Sortable(s => s.SortMode(GridSortMode.MultipleColumn))
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#HistoryDataAccordion').on('shown.bs.collapse', function () {
+        var grid = $("#gridHistory").data("kendoGrid");
+        if (grid) {
+            // Example: Adjusting height based on the grid's content up to a max height
+            var contentHeight = grid.content.height();
+            var desiredHeight = Math.min(contentHeight + 100, 400); // Calculate desired height
+            grid.element.height(desiredHeight);
+            grid.resize();
+        }
+    });
+
+
+    function onError(e) {
+        alert("Error event triggered: " + e.errors);
+        var grid = $("#gridHistory").data("kendoGrid");
+        grid.dataSource.data([]); // Clear the grid data
+        grid.refresh(); // Refresh the grid
+        var gridContent = grid.element.find(".k-grid-content");
+        gridContent.empty()
+            .append('<div style="text-align:center;padding:10px;"><strong>' + e.errors + '</strong></div>')
+            .append('<table><colgroup></colgroup><tbody></tbody></table>'); // Reset the table structure
+    }
+
+    $(document).ready(function () {
+        var grid = $("#gridHistory").data("kendoGrid");
+
+        // Ensure placeholder is added
+        var toolbar = $("#gridHistory .k-grid-toolbar");
+        if ($("#totalRecords").length === 0) {
+            toolbar.append('<div style="margin-left: auto; text-align: right; margin-right:10px;"><span id="totalRecords" class="total-records">@Grid.Totalrecords </span></div>');
+        }
+
+
+        // Bind the onDataBound event handler
+        grid.bind("dataBound", function () {
+            var total = this.dataSource.total();
+            $("#totalRecords").text("@Grid.Totalrecords " + total);
+        });
+
+        // Manually trigger the dataBound event to update the count immediately
+        grid.trigger("dataBound");
+    });
+
+</script>
+<style>
+    .k-grid-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .k-grid .k-grid-toolbar {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .total-records {
+        font-weight: bold;
+        color: #333;
+    }
+
+</style>

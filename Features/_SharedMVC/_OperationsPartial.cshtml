@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@model SIDPSF.Features.SharedMVC.BaseCrudModel
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="card mb-1">
+    <div class="accordion" id="OperationsDataAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOperationsData">
+                <button class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOperationsData" aria-expanded="false" aria-controls="collapseOperationsData">
+                    @ResourceRepo.GetResourceByName("Operations")
+                </button>
+            </h2>
+            <div id="collapseOperationsData" class="accordion-collapse" aria-labelledby="headingOperationsData" data-bs-parent="#OperationsDataAccordion">
+                <div class="accordion-body">
+                    @if (Model._AllowedOperations.Any())
+                    {
+                        <div>
+                            @for (int i = 0; i < Model._AllowedOperations.Count; i++)
+                            {
+                                @Html.Raw(Model._AllowedOperations[i])
+                                if (i < Model._AllowedOperations.Count - 1)
+                                {
+                                    <span> | </span>
+                                }
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@ResourceRepo.GetResourceByName("NoOperationsAvailable")</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@using SIDPSF.Common
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+
+
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+        </div>
+        <div class="d-flex">
+            @*Language dropdown*@
+            <div class="dropdown d-inline-block">
+                <button type="button" id="Language-Button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("IdLanguage") == null)
+                    {
+                        <text>SHQIP</text>
+                    }
+                    else
+                    {
+                        switch (HttpContextAccessor.HttpContext.Session.GetString("IdLanguage"))
+                        {
+                            case "1":
+                                <text>ENGLISH</text>
+                                break;
+
+                            case "2":
+                                <text>SHQIP</text>
+                                break;
+
+                            case "3":
+                                <text>SRPSKI</text>
+                                break;
+
+                            default:
+                                <text>ENGLISH</text>
+                                break;
+                        }
+                    }
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("IdLanguage") != "1")
+                    {
+                        <text>
+                            <a href="@Url.Action("SetLanguage", "UserLanguage" , new {@IdLanguage = "1", @RawUrl = @Context.Request.GetEncodedUrl()})" class="dropdown-item notify-item language" data-lang="1">
+                                <span class="align-middle">ENGLISH</span>
+                            </a>
+                        </text>
+                    }
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("IdLanguage") != "2")
+                    {
+                        <text>
+                            <a href="@Url.Action("SetLanguage", "UserLanguage" , new {@IdLanguage = "2", @RawUrl = @Context.Request.GetEncodedUrl()})" class="dropdown-item notify-item language" data-lang="2">
+                                <span class="align-middle">SQHIP</span>
+                            </a>
+                        </text>
+                    }
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("IdLanguage") != "3")
+                    {
+                        <text>
+                            <a href="@Url.Action("SetLanguage", "UserLanguage" , new {@IdLanguage = "3", @RawUrl = @Context.Request.GetEncodedUrl()})" class="dropdown-item notify-item language" data-lang="3">
+                                <span class="align-middle">SRPSKI</span>
+                            </a>
+                        </text>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script async="async">
+    $(document).ready(function () {
+        $('.language').click(function (e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            var languageId = $(this).data('lang');
+            var rawUrl = window.location.href; // Get the current URL
+
+            $.ajax({
+                url: '/UserLanguage/SetLanguage', // Update the URL based on your routing
+                type: 'POST',
+                data: { IdLanguage: languageId, RawUrl: rawUrl },
+                success: function (response) {
+                    window.location.href = rawUrl; // Redirect to the same page to see the changes
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error changing language:", error);
+                }
+            });
+        });
+    });
+</script>

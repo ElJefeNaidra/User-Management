@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@model SIDPSF.Features.SharedMVC.BaseCrudModel;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="card-footer bg-transparent border-top text-muted"></div>
+
+@{
+    if (Model.crudOp == CrudOp.Create)
+    {
+        <button type="button" id="btnCreate" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-save label-icon"></i>@ResourceRepo.GetResourceByName("btnCreate")</button>
+
+        <script>
+            $(document).ready(function () {
+                $("#btnCreate").click(function (event) {
+                    var button = $(this);
+                    button.prop('disabled', true);
+
+                    // Initialize the form validation
+                    $("#form").validate();
+
+                    // Check if the form is valid using jQuery Unobtrusive Validation
+                    if ($("#form").valid()) {
+                        // If valid, the form will submit
+                        // The button will stay disabled to prevent multiple submissions
+                        $("#form").submit();
+
+                    } else {
+                        // If not valid, prevent form submission and re-enable the button
+                        event.preventDefault();
+                        button.prop('disabled', false);
+                    }
+                });
+            });
+        </script>
+    }
+
+    if (Model.crudOp == CrudOp.Update || Model.crudOp == CrudOp.Enable || Model.crudOp == CrudOp.Disable)
+    {
+        <button type="button" id="btnUpdate" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-check-circle label-icon"></i>@ResourceRepo.GetResourceByName("btnUpdate")</button>
+
+        <script>
+            $(document).ready(function () {
+                $("#btnUpdate").click(function (event) {
+                    var button = $(this);
+                    button.prop('disabled', true);
+
+                    // Initialize the form validation
+                    $("#form").validate();
+
+                    // Check if the form is valid using jQuery Unobtrusive Validation
+                    if ($("#form").valid()) {
+                        // If valid, the form will submit
+                        // The button will stay disabled to prevent multiple submissions
+                        $("#form").submit();
+
+                    } else {
+                        // If not valid, prevent form submission and re-enable the button
+                        event.preventDefault();
+                        button.prop('disabled', false);
+                    }
+                });
+            });
+        </script>
+    }
+    
+    if (Model.crudOp == CrudOp.Delete)
+    {
+        <button type="button" id="btnDelete" class="btn btn-warning waves-effect btn-label waves-light"><i class="bx bx-x-circle label-icon"></i>@ResourceRepo.GetResourceByName("btnDelete")</button>
+
+        <script>
+            $(document).ready(function () {
+                $("#btnDelete").click(function (event) {
+                    var button = $(this);
+                    button.prop('disabled', true);
+
+                    // Initialize the form validation
+                    $("#form").validate();
+
+                    // Check if the form is valid using jQuery Unobtrusive Validation
+                    if ($("#form").valid()) {
+                        // If valid, the form will submit
+                        // The button will stay disabled to prevent multiple submissions
+                        $("#form").submit();
+
+                    } else {
+                        // If not valid, prevent form submission and re-enable the button
+                        event.preventDefault();
+                        button.prop('disabled', false);
+                    }
+                });
+            });
+        </script>
+    }
+}
+<button type="button" class="btn btn-danger waves-effect btn-label waves-light" onclick="location.href='@Model.ReturnUrl'"><i class="bx bx-arrow-back label-icon"></i>@ResourceRepo.GetResourceByName("btnGoBack")</button>

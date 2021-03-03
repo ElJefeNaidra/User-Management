@@ -1,0 +1,220 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model SIDPSF.Features.Administration.Communication.CommunicationModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+<div class="card mb-1">
+    <div class="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                @ResourceRepo.GetResourceByName("CommunicationData")
+            </h2>
+            <div class="accordion-collapse">
+                <div class="accordion-body">
+                    <form asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" method="post" id="form" enctype="multipart/form-data">
+
+                        <input type="hidden" id="_RowTimestamp" asp-for="_RowTimestamp" />
+                        <input type="hidden" id="_RowGuid" asp-for="_RowGuid" />
+                        <input type="hidden" id="IdCommunication" asp-for="IdCommunication" />
+
+
+                        <fieldset>
+
+                            <!-- #region CommunicationGUID -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="CommunicationGUID"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="CommunicationGUID" id="CommunicationGUID" type="text" class="form-control" disabled />
+                                </div>
+                            </div>
+
+                            <!-- #region IdTypeOfCommunication -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="IdTypeOfCommunication"></label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="IdTypeOfCommunication" asp-for="IdTypeOfCommunication" asp-items="@(new SelectList(Model.IdTypeOfCommunicationDdl, "Id", "Description"))" disabled>
+                                        <option value="">@Common.DdlEmpty</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- #region PhoneNo -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="PhoneNo"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="PhoneNo" id="PhoneNo" type="text" class="form-control" disabled />
+                                </div>
+                            </div>
+
+                            <!-- #region SMSContent -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="SMSContent"></label>
+                                <div class="col-sm-9">
+                                    <textarea asp-for="SMSContent"
+                                              class="form-control scrollable-textarea limited-resize-textarea"
+                                              disabled
+                                              id="SMSContent"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- #region EmailAddress -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="EmailAddress"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="EmailAddress" id="EmailAddress" type="text" class="form-control" disabled />
+                                </div>
+                            </div>
+
+                            <!-- #region EmailSubject -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="EmailSubject"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="EmailSubject" id="EmailSubject" type="text" class="form-control" disabled />
+                                </div>
+                            </div>
+
+                            <!-- #region EmailContent -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="EmailContent"></label>
+                                <div class="col-sm-9">
+                                    <textarea asp-for="EmailContent"
+                                              class="form-control scrollable-textarea limited-resize-textarea"
+                                              disabled
+                                              id="EmailContent"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- #region Sent -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="Sent"></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Sent" id="Sent" class="form-check-input large-checkbox" disabled />
+                                    <span asp-validation-for="Sent" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- #region DateSent -->
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" asp-for="DateSent"></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" asp-for="DateSent" disabled />
+                                </div>
+                            </div>
+
+                            @{
+                                if (Model.crudOp == CrudOp.Read || Model.crudOp == CrudOp.ReadHistory)
+                                {
+                                    <!-- #region IsCanceled -->
+                                    <div class="row mb-4">
+                                        <label class="col-sm-3 col-form-label" asp-for="IsCanceled"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="IsCanceled" id="IsCanceled" class="form-check-input large-checkbox" disabled />
+                                        </div>
+                                    </div>
+
+                                    <!-- #region CanceledUncanceledComment -->
+                                    <div class="row mb-4" style="display:@Model.display_CanceledUncanceledComment;">
+                                        <label class="col-sm-3 col-form-label" asp-for="CanceledUncanceledComment"></label>
+                                        <div class="col-sm-9">
+                                            <textarea asp-for="CanceledUncanceledComment"
+                                                      class="form-control scrollable-textarea limited-resize-textarea"
+                                                      disabled
+                                                      id="CanceledUncanceledComment"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- #region display_DateEnabledDisabled -->
+                                    <div class="row mb-4">
+                                        <label class="col-sm-3 col-form-label" asp-for="DateCanceledUncanceled"></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" asp-for="DateCanceledUncanceled" disabled />
+                                        </div>
+                                    </div>
+                                }
+
+                                if (Model.crudOp == CrudOp.Cancel || Model.crudOp == CrudOp.Uncancel || Model.crudOp == CrudOp.Resend)
+                                {
+                                    <!-- #region CanceledUncanceledComment -->
+                                    <div class="row mb-4" style="display:@Model.display_CanceledUncanceledComment;">
+                                        <label class="col-sm-3 col-form-label" asp-for="CanceledUncanceledComment"></label>
+                                        <div class="col-sm-9">
+                                            <textarea asp-for="CanceledUncanceledComment"
+                                                      class="form-control scrollable-textarea limited-resize-textarea"
+                                                      id="CanceledUncanceledComment"></textarea>
+                                            <span asp-validation-for="CanceledUncanceledComment" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </fieldset>
+
+                        @if (Model.crudOp == CrudOp.Cancel || Model.crudOp == CrudOp.Uncancel || Model.crudOp == CrudOp.Resend)
+                        {
+                        <button type="button" id="btnUpdate" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-check-circle label-icon"></i>@ResourceRepo.GetResourceByName("btnUpdate")</button>
+
+                        <script>
+                            $(document).ready(function () {
+                                $("#btnUpdate").click(function (event) {
+                                    var button = $(this);
+                                    button.prop('disabled', true);
+
+                                    // Initialize the form validation
+                                    $("#form").validate();
+
+                                    // Check if the form is valid using jQuery Unobtrusive Validation
+                                    if ($("#form").valid()) {
+                                        // If valid, the form will submit
+                                        // The button will stay disabled to prevent multiple submissions
+                                        $("#form").submit();
+
+                                    } else {
+                                        // If not valid, prevent form submission and re-enable the button
+                                        event.preventDefault();
+                                        button.prop('disabled', false);
+                                    }
+                                });
+                            });
+                        </script>
+                        }
+
+                        <button type="button" class="btn btn-danger waves-effect btn-label waves-light" onclick="location.href='@Model.ReturnUrl'"><i class="bx bx-arrow-back label-icon"></i>@ResourceRepo.GetResourceByName("btnGoBack")</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    if (Model.crudOp == CrudOp.Read)
+    {
+        @await Html.PartialAsync("~/Features/_SharedMVC/_OperationsPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_AuditDataPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_HistoryGridPartial.cshtml")
+    }
+}
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")

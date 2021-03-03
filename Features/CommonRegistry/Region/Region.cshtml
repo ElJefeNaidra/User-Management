@@ -1,0 +1,133 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model SIDPSF.Features.CommonRegistry.Region.RegionModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+<div class="card mb-1">
+    <div class="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                @ResourceRepo.GetResourceByName("RegionData")
+            </h2>
+            <div class="accordion-collapse">
+                <div class="accordion-body">
+                    <form asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" method="post" id="form" enctype="multipart/form-data">
+
+                        <input type="hidden" id="_RowTimestamp" asp-for="_RowTimestamp" />
+                        <input type="hidden" id="_RowGuid" asp-for="_RowGuid" />
+                        <input type="hidden" id="IdRegion" asp-for="IdRegion" />
+
+                            <fieldset>
+                                <!-- #region EnDescription -->
+                                <div class="row mb-4" style="display:@Model.display_EnDescription;">
+                                    <label class="col-sm-3 col-form-label" asp-for="EnDescription"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="EnDescription" id="EnDescription" type="text" class="form-control" disabled="@(Model.disable_EnDescription ? "disabled" : null)" />
+                                        <span asp-validation-for="EnDescription" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- #region SqDescription -->
+                                <div class="row mb-4" style="display:@Model.display_SqDescription;">
+                                    <label class="col-sm-3 col-form-label" asp-for="SqDescription"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="SqDescription" id="SqDescription" type="text" class="form-control" disabled="@(Model.disable_SqDescription ? "disabled" : null)" />
+                                        <span asp-validation-for="SqDescription" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- #region SrDescription -->
+                                <div class="row mb-4" style="display:@Model.display_SrDescription;">
+                                    <label class="col-sm-3 col-form-label" asp-for="SrDescription"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="SrDescription" id="SrDescription" type="text" class="form-control" disabled="@(Model.disable_SrDescription ? "disabled" : null)" />
+                                        <span asp-validation-for="SrDescription" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            @{
+                                if (Model.crudOp == CrudOp.Read || Model.crudOp == CrudOp.ReadHistory)
+                                {
+                                    <!-- #region IsEnabled -->
+                                    <div class="row mb-4" style="display:@Model.display_IsEnabled;">
+                                        <label class="col-sm-3 col-form-label" asp-for="IsEnabled"></label>
+                                        <div class="col-sm-9">
+                                            <input asp-for="IsEnabled" id="IsEnabled" class="form-check-input large-checkbox" disabled />
+                                        </div>
+                                    </div>
+
+                                    <!-- #region EnabledDisabledComment -->
+                                    <div class="row mb-4" style="display:@Model.display_EnabledDisabledComment;">
+                                        <label class="col-sm-3 col-form-label" asp-for="EnabledDisabledComment"></label>
+                                        <div class="col-sm-9">
+                                            <textarea asp-for="EnabledDisabledComment"
+                                                      class="form-control scrollable-textarea limited-resize-textarea"
+                                                      disabled="@(Model.disable_EnabledDisabledComment ? "disabled" : null)"
+                                                      id="EnabledDisabledComment"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- #region display_DateEnabledDisabled -->
+                                    <div class="row mb-4" style="display:@Model.display_DateEnabledDisabled;">
+                                        <label class="col-sm-3 col-form-label" asp-for="DateEnabledDisabled"></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" asp-for="DateEnabledDisabled" disabled />
+                                        </div>
+                                    </div>
+                                }
+
+                                if (Model.crudOp == CrudOp.Enable || Model.crudOp == CrudOp.Disable)
+                                {
+                                    <!-- #region EnabledDisabledComment -->
+                                    <div class="row mb-4" style="display:@Model.display_EnabledDisabledComment;">
+                                        <label class="col-sm-3 col-form-label" asp-for="EnabledDisabledComment"></label>
+                                        <div class="col-sm-9">
+                                            <textarea asp-for="EnabledDisabledComment"
+                                                      class="form-control scrollable-textarea limited-resize-textarea"
+                                                      disabled="@(Model.disable_EnabledDisabledComment ? "disabled" : null)"
+                                                      id="EnabledDisabledComment"></textarea>
+                                            <span asp-validation-for="EnabledDisabledComment" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </fieldset>
+
+                        @await Html.PartialAsync("~/Features/_SharedMVC/_ButtonsCRUDPartial.cshtml")
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    if (Model.crudOp == CrudOp.Read)
+    {
+        @await Html.PartialAsync("~/Features/_SharedMVC/_OperationsPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_AuditDataPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_HistoryGridPartial.cshtml")
+    }
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+

@@ -1,0 +1,210 @@
+﻿@using SIDPSF.Common
+<!-- ========== Left Sidebar Start ========== -->
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Check if JavaScript is enabled -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=/NoJScript" />
+    </noscript>
+
+    <!-- Header -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDPSFF | @ViewBag.WindowTitle</title>
+    <meta content="SIDPSFF" name="description" />
+    <meta content="SIDPSFF" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+
+    <script src="~/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/assets/libs/node-waves/waves.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
+
+    <link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" />
+    <!-- Icons Css -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" />
+    <!-- App Css-->
+    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" />
+
+
+    <link href="~/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/assets/fonts/fontawesome/css/brands.min.css" rel="stylesheet" />
+    <link href="~/assets/fonts/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/assets/fonts/fontawesome/css/regular.min.css" rel="stylesheet" />
+    <link href="~/assets/fonts/fontawesome/css/solid.min.css" rel="stylesheet" />
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+
+</head>
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        
+        @await Html.PartialAsync("~/Features/_Layout_Topbar.cshtml")
+        @await Html.PartialAsync("~/Features/_Layout_Sidebar.cshtml")
+
+
+    @* NO SCRIPT TAG NEEDS TO STAY HERE *@
+    <noscript>
+        <div style="color: red; background-color: yellow; text-align: center;">
+            This application requires JavaScript to be enabled.
+        </div>
+    </noscript>
+
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">@ViewBag.FormTitle</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">@ViewBag.BreadCrumbRoot</a></li>
+                                        <li class="breadcrumb-item active">@ViewBag.BreadCrumbTitle</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    @RenderBody()
+                </div> <!-- container-fluid -->
+            </div>
+            <br />
+            <!-- End Page-content -->
+            <!-- FOOTER-->
+            <footer class="footer" style="padding: 10px calc(24px / 2);">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @ResourceRepo.GetResourceByName("FooterSystemName")<br />
+                            ©<script>document.write(new Date().getFullYear())</script> @ResourceRepo.GetResourceByName("FooterInstitutionName")<br />
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END FOOTER-->
+
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+
+    @* PREVENT ENTER KEY FROM SUBMITTING THE FORMS *@
+    <script>
+        $(document).ready(function () {
+            $('form').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+@* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <header class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">SIDPSF</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </header>
+
+
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center mt-4 mb-2">
+                        <span>Menu</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new menu">+</a>
+                    </h6>
+
+                    @{
+                        var menuStructure = HttpContextAccessor.HttpContext.Session.GetString("MenuStructure");
+                    }
+
+                    <div>
+                        @if (!string.IsNullOrEmpty(menuStructure))
+                        {
+                            @Html.Raw(menuStructure)
+                        }
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+
+        <div class="row">
+            <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+                <div class="container">
+                    <main role="main" class="pb-3">
+
+                        @RenderBody()
+                    </main>
+                </div>
+
+                <footer class="border-top footer text-muted mt-3">
+                    <div class="container">
+                        &copy; 2023 - SIDPSF - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+
+ *@

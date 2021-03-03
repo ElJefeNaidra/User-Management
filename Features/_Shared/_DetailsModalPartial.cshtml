@@ -1,0 +1,67 @@
+﻿<!-- #region ModaliPerPopupa -->
+<div class="modal fade" id="DetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" id="btnCloseModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" async="async">
+    $(document).ready
+    function ShowModal(Url) {
+        $.get(Url, function (data) {
+            $("#DetailsModal").find("div.modal-body").html(data);
+            $("#modalTitle").text('@ViewBag.ModalTitle');
+            $("#DetailsModal").modal("show");
+        });
+
+        // Pozita fillestare e Modalit
+        $("#DetailsModal").data
+            ({
+                'originalLeft': $("#DetailsModal").css('left'),
+                'origionalTop': $("#DetailsModal").css('top')
+            });
+
+        $(".modal").on("hidden.bs.modal", function () {
+            $(".modal-body").html("");
+        });
+
+        // Close modal button
+        $('#btnCloseModal').click(function () {
+
+            // Clear modal body div
+            $("#DetailsModal").on("hidden.bs.modal", function () {
+                $(".modal-body").html("");
+                location.reload();
+            });
+
+            // Reset position of modal
+            $("#DetailsModal").css({
+                'left': $("#DetailsModal").data('originalLeft'),
+                'top': $("#DetailsModal").data('origionalTop')
+            });
+
+            // Refresh datatables
+            //alert("dipshit");
+
+
+            //$("#" + GridName).data.reload();
+
+        });
+
+        return false;
+    }
+</script>
+
+<style>
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+</style>

@@ -1,0 +1,65 @@
+@using Common
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.Grid
+@using SIDPSF._Resources
+@model SIDPSF.Features.CommonRegistry.Language.LanguageSimpleSearchModel
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+
+
+<div class="card mb-1">
+    <div class="card-body">
+        @(Html.Kendo().Grid<dynamic>(Model.GetDynamicLanguageData())
+            .Name("gridSimpleSearch")
+            .Excel(excel => excel
+            .FileName("Language_SimpleSearch_Grid_Export.xlsx")
+            .AllPages(true)
+            .ProxyURL(@Url.Action("Excel_Export_Save", "Language"))
+            )
+            .Scrollable()
+            .ToolBar(tools =>
+            {
+                tools.Excel().Text(Grid.Excel);
+                tools.Custom().
+                HtmlAttributes(new { onclick = "location.href='" + "/Language/Create" + "';return false;" })
+                .Name("btnAdd")
+                .Text(ResourceRepo.GetResourceByName("btnAdd"))
+                .IconClass("k-icon k-i-add");
+            })
+
+            .Columns(columns =>
+            {
+                columns.GenerateGridColumns(Model.LanguageData, ResourceRepo);
+            })
+
+            .AllowCopy(true)
+            .NoRecords(true)
+            .Messages(messages => { messages.NoRecords(Grid.NoRecords); })
+            .LoaderType(GridLoaderType.LoadingPanel)
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false)
+            .Events(events => events.Error("onError")))
+            .Filterable(f => f.Extra(false).Operators(o => o.ForString(configurator => configurator.Clear().StartsWith(Grid.StartsWith).Contains(Grid.Contains).IsNullOrEmpty(Grid.IsNullOrEmpty))))
+            .Sortable(s => s.SortMode(GridSortMode.MultipleColumn))
+            )
+    </div>
+</div>
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridSimpleSearchPartial.cshtml")

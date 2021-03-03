@@ -1,0 +1,24 @@
+﻿@using SIDPSF.Common
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName("NavigationTitle");
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName("NavigationTitle");
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName("NavigationSubtitle");
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName("Navigation");
+}
+
+<div class="card mb-1">
+    <div class="card-body">
+        <h3 class="card-title">@ResourceRepo.GetResourceByName("LandingPage")</h3> @*// Tag here*@
+        <p class="card-title-desc">
+            @ResourceRepo.GetResourceByName("LandingPage")@*// Tag here*@
+        </p>
+        @ResourceRepo.GetResourceByName("Welcome")@*// Tag here*@
+    </div>
+</div>
+

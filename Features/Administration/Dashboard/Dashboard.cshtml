@@ -1,0 +1,31 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@model SIDPSF.Features.Administration.Dashboard.DashboardModel
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName("AdministrationDashboard");
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName("AdministrationDashboard");
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName("Administration");
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName("Dashboard");
+}
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+
+@await Html.PartialAsync("~/Features/Administration/Dashboard/_UserDataDashboardPartial.cshtml", Model)
+@await Html.PartialAsync("~/Features/Administration/Dashboard/_CommunicationDataDashboardPartial.cshtml", Model)
+@await Html.PartialAsync("~/Features/Administration/Dashboard/_UserGridDataDashboardPartial.cshtml", Model)
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            window.location.reload();
+        }, 30000); // 30000 milliseconds = 30 seconds
+    });
+</script>

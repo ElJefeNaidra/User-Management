@@ -1,0 +1,234 @@
+﻿<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validate/additional-methods.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery.inputmask/jquery.inputmask.min.js"></script>
+<script src="~/lib/CustomScripts/CustomFunctions.js"></script>
+<link href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+
+@* Custom Client Validators *@
+<script>
+    @* Custom Validator for File Size and Type *@
+    @* Implements the validator in the FileTypeMaxSizeAttribute.cs for client side *@
+
+        $.validator.addMethod("filetypemaxsize", function (value, element, params) {
+            if (element.files.length < 1) {
+                return true; // No file selected
+            }
+
+            var fileSize = element.files[0].size;
+            var maxSize = parseInt(params.maxsize, 10); // Ensure it's an integer
+            var allowedExtensions = params.extensions.split(',').map(function (ext) {
+                return ext.trim().toLowerCase(); // Trim and convert to lower case
+            });
+            var fileExtension = '.' + element.files[0].name.split('.').pop().toLowerCase();
+
+
+            if (fileSize > maxSize) {
+                return false; // File size is too large
+            }
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                return false; // File extension is not allowed
+            }
+
+            return true; // File size and extension are valid
+        }, '');
+
+
+    $.validator.unobtrusive.adapters.add('filetypemaxsize', ['maxsize', 'extensions'], function (options) {
+        options.rules['filetypemaxsize'] = {
+            maxsize: options.params.maxsize,
+            extensions: options.params.extensions
+        };
+        options.messages['filetypemaxsize'] = options.message;
+    });
+</script>
+
+<script>
+    @* Custom Validator for BBAN *@
+    @* Implements the validator in the BBANValidatorAttribute.cs for client side *@
+
+    // Validation Function
+    function isValidBBAN(BBAN) {
+        if (BBAN.length === 0) {
+            return true;
+        }
+        if (BBAN.length !== 16) {
+            return false;
+        }
+
+        var BBANWOChecksum = BBAN.substring(0, 14);
+        var Checksum = BBAN.substring(14); // Corrected to get the last two characters
+        var BBANFull = BBANWOChecksum + "00";
+
+        var x = parseInt(BBANFull) / 97;
+        var Base = Math.floor(x) * 97;
+        Base = parseInt(BBANFull) - Base;
+        Base = 98 - Base;
+
+        if (parseInt(Checksum) === Base) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Add a custom method to jQuery validator
+    $.validator.addMethod("bban", function (value, element) {
+        return isValidBBAN(value);
+    }, "Invalid BBAN.");
+
+    // Integrate with unobtrusive validation
+    $.validator.unobtrusive.adapters.add("bban", function (options) {
+        options.rules["bban"] = true;
+        options.messages["bban"] = options.message;
+    });
+</script>
+
+<script>
+    @* Custom Validator for RKSID *@
+    @* Implements the validator in the RKSIDValidationAttribute.cs for client side *@
+
+    // Validation Function
+    function isValidRKSID(RKSID) {
+        if (RKSID.length !== 10 || isNaN(RKSID.charAt(9))) {
+            return false;
+        }
+
+        var Weights = [4, 3, 2, 7, 6, 5, 4, 3, 2];
+        var Result = 0;
+
+        for (var i = 0; i < 9; i++) {
+            var IdChar = RKSID.charAt(i);
+            if (isNaN(IdChar)) {
+                return false;
+            }
+
+            Result += (parseInt(IdChar, 10)) * Weights[i];
+        }
+
+        var calculatedCheckDigit = (11 - (Result % 11)) % 10;
+
+        if (calculatedCheckDigit === 10) calculatedCheckDigit = 0; // Adjust for cases where calculated digit is 10
+
+        var actualCheckDigit = parseInt(RKSID.charAt(9), 10);
+
+        if (calculatedCheckDigit === actualCheckDigit) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Add a custom method to jQuery validator
+    $.validator.addMethod("rksid", function (value, element) 
+    {
+        return isValidRKSID(value);
+    }, "Invalid RKSID.");
+
+    // Integrate with unobtrusive validation
+    $.validator.unobtrusive.adapters.add("rksid", function (options) {
+        options.rules["rksid"] = true;
+        options.messages["rksid"] = options.message;
+    });
+</script>
+
+
+@* Styles for doing red thing on fields requiring validation *@
+<style>
+    .input-validation-error {
+        border: 1px solid red !important;
+    }
+
+    .scrollable-textarea {
+        overflow: auto; /* or 'scroll' if you always want scrollbars */
+        height: 100px; /* Adjust height as needed */
+    }
+
+    .limited-resize-textarea {
+        resize: vertical;
+        max-height: 200px;
+    }
+
+</style>
+
+<style>
+    .large-checkbox {
+        width: 25px; /* or any size you prefer */
+        height: 25px; /* match width for square checkbox */
+        cursor: pointer;
+    }
+</style>
+
+
+@* Validation tooltips *@
+<script>
+    $(document).ready(function () {
+        // Function to update tooltip with validation message
+        var updateTooltip = function (element, message) {
+            if (message) {
+                $(element).tooltip('dispose')
+                    .tooltip({
+                        title: message,
+                        placement: 'top'
+                    })
+                    .tooltip('show');
+            } else {
+                $(element).tooltip('dispose');
+            }
+        };
+
+        // Listen for unobtrusive validation events
+        $(document).on('input keyup change keypress', 'form input, form select, form textarea', function () {
+            var $field = $(this);
+            var fieldName = $field.attr('name');
+            var $validationSpan = $("span[data-valmsg-for='" + fieldName + "']");
+            var message = $validationSpan.text();
+
+            updateTooltip(this, message);
+        });
+
+        // Initialize tooltips
+        $('form input, form select, form textarea').tooltip
+            ({
+                trigger: 'focus',
+                placement: 'top'
+            });
+
+        // Additional: On form submit, update tooltips for invalid fields
+        $('form').on('submit', function () {
+            var $form = $(this);
+            $form.find('input, select, textarea').each(function () {
+                var name = $(this).attr('name');
+                var $validationSpan = $("span[data-valmsg-for='" + name + "']");
+                var message = $validationSpan.text();
+                updateTooltip(this, message);
+            });
+        });
+    });
+</script>
+
+
+<style>
+    /* Hide validation message spans */
+    .field-validation-error {
+        display: none;
+    }
+</style>
+
+<style>
+    .tooltip-inner {
+        max-width: 100%;
+        padding: .25rem .5rem;
+        color: #fff;
+        text-align: center;
+        background-color: red;
+        border-radius: .25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        box-shadow: 0 0 .5em #666;
+    }
+</style>

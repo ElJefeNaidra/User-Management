@@ -1,0 +1,276 @@
+@using Common
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.Grid
+@using SIDPSF._Resources
+@model SIDPSF.Features.Administration.GlobalAccessTracking.GlobalAccessTrackingPagedSearchModel
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+<div class="card">
+
+        <div class="accordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed" type="button">
+                        @ResourceRepo.GetResourceByName("SearchFilter")
+                    </button>
+                </h2>
+                <div id="collapseHistoryData" class="accordion-collapse">
+                    <div class="accordion-body">
+
+                        <form asp-controller="@Model.FormControllerName" asp-action="@Model.FormActionName" method="post" id="filterForm">
+                            <fieldset>
+
+                                <!-- #region DateOfRecord -->
+                                <!-- #region GlobalAccessTrackingGUID -->
+
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label" asp-for="GlobalAccessTrackingGUID"></label>
+                                        <input asp-for="GlobalAccessTrackingGUID" id="GlobalAccessTrackingGUID" type="text" class="form-control" />
+                                        <span asp-validation-for="GlobalAccessTrackingGUID" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region IdUser -->
+                                    <div class="col-md-4">
+                                        <label class="form-label" asp-for="IdUser"></label>
+                                        <select class="form-select" id="IdUser" asp-for="IdUser" asp-items="@(new SelectList(Model.IdUserDdl, "Id", "Description"))"><option value="">@Common.DdlChoose</option></select>
+                                    </div>
+
+                                    <!-- #region IdAuthorisation -->
+                                    <div class="col-md-4">
+                                        <label class="form-label" asp-for="IdAuthorisation"></label>
+                                        <select class="form-select" id="IdAuthorisation" asp-for="IdAuthorisation" asp-items="@(new SelectList(Model.IdAuthorisationDdl, "Id", "Description"))"><option value="">@Common.DdlChoose</option></select>
+                                    </div>
+
+                                    <!-- #region ControllerName -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="ControllerName"></label>
+                                        <input asp-for="ControllerName" id="ControllerName" type="text" class="form-control" />
+                                        <span asp-validation-for="ControllerName" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region ControllerAction -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="ControllerAction"></label>
+                                        <input asp-for="ControllerAction" id="ControllerAction" type="text" class="form-control" />
+                                        <span asp-validation-for="ControllerAction" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region IPAddress -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="IPAddress"></label>
+                                        <input asp-for="IPAddress" id="IPAddress" type="text" class="form-control" />
+                                        <span asp-validation-for="IPAddress" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region UserAgent -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="UserAgent"></label>
+                                        <input asp-for="UserAgent" id="UserAgent" type="text" class="form-control" />
+                                        <span asp-validation-for="UserAgent" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region Browser -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="Browser"></label>
+                                        <input asp-for="Browser" id="Browser" type="text" class="form-control" />
+                                        <span asp-validation-for="Browser" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- #region OperatingSystem -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="OperatingSystem"></label>
+                                        <input asp-for="OperatingSystem" id="OperatingSystem" type="text" class="form-control" />
+                                        <span asp-validation-for="OperatingSystem" class="text-danger"></span>
+                                    </div>
+
+
+                                    <!-- #region SessionID -->
+                                    <div class="col-md-3">
+                                        <label class="form-label" asp-for="SessionID"></label>
+                                        <input asp-for="SessionID" id="SessionID" type="text" class="form-control" />
+                                        <span asp-validation-for="SessionID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <br />
+                            <div class="card-footer bg-transparent border-top text-muted"></div>
+                            <div class="row g-6">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-secondary waves-effect btn-label waves-light"><i class="bx bx-search label-icon"></i>@ResourceRepo.GetResourceByName("btnSearch")</button>
+                                    <button type="button" id="btnClear" class="btn btn-danger waves-effect btn-label waves-light"><i class="bx bx-x label-icon"></i>@ResourceRepo.GetResourceByName("btnClear")</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @(Html.Kendo().Grid<dynamic>()
+            .Name("gridSearch")
+            .Excel(excel => excel
+            .FileName("GlobalAccessTracking_Search_Grid_Export.xlsx")
+            .ProxyURL(@Url.Action("Excel_Export_Save", "GlobalAccessTracking"))
+            )
+            .Scrollable()
+            @*Toolbar*@
+            .ToolBar(tools =>
+            {
+                tools.Excel().Text(Grid.Excel);
+            })
+
+            .Columns(columns =>
+            {
+                columns.GenerateGridColumns(Model.GlobalAccessTrackingData, ResourceRepo);
+            })
+
+            .AllowCopy(true)
+            .NoRecords(true)
+            .Messages(messages => { messages.NoRecords(Grid.NoRecords); })
+            .LoaderType(GridLoaderType.LoadingPanel)
+            .Pageable(pageable =>
+            {
+                pageable.PageSizes(new int[] { 10, 20, 50, 100 });
+                pageable.ButtonCount(5);
+                pageable.Enabled(true);
+                pageable.AlwaysVisible(true);
+                pageable.Info(true);
+                pageable.Refresh(true);
+                pageable.Responsive(true);
+            })
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(true)
+            .PageSize(10)
+            .Read(read => read.Action("GetSearchGridData", "GlobalAccessTrackingPagedSearch").Type(HttpVerbs.Post).Data("additionalData"))
+            .Events(events => events.Error("onError")))
+            .Events(events => events.DataBound("onDataBound"))
+            )
+
+
+</div>
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+
+<script>
+    function additionalData() {
+        // Collect form data
+        var formData = $("#filterForm").serializeArray();
+
+        // Get the current page and page size from the grid's dataSource
+        var grid = $("#gridSearch").data("kendoGrid");
+        var pageSize = grid.dataSource.pageSize();
+        var page = grid.dataSource.page();
+
+        // Convert form data to an object
+        var dataObject = {};
+        $.each(formData, function (i, field) {
+            dataObject[field.name] = field.value;
+        });
+
+        // Page, and PageSize to the object
+        dataObject.PageSize = pageSize;
+        dataObject.Page = page;
+
+        return dataObject;
+    }
+
+    function onError(e) {
+        alert("Error event triggered: " + e.errors);
+        var grid = $("#gridSearch").data("kendoGrid");
+        grid.dataSource.data([]); // Clear the grid data
+        grid.refresh(); // Refresh the grid
+        var gridContent = grid.element.find(".k-grid-content");
+        gridContent.empty()
+            .append('<div style="text-align:center;padding:10px;"><strong>' + e.errors + '</strong></div>')
+            .append('<table><colgroup></colgroup><tbody></tbody></table>'); // Reset the table structure
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#filterForm").submit(function (e) {
+            e.preventDefault();
+            // Check if the form is valid using jQuery Validation's valid() method
+            if ($(this).valid()) {
+                submitForm();
+            }
+        });
+
+        $("#btnClear").click(function () {
+            clearFormAndRefresh();
+        });
+    });
+
+    function submitForm() {
+        var grid = $("#gridSearch").data("kendoGrid");
+        var pageSize = grid.dataSource.pageSize();
+
+        // Reset the grid's current page to 1
+        grid.dataSource.page(1);
+        var page = 1; // Now, the page will always be set to 1 for this function
+
+        $.ajax({
+            type: 'POST',
+            url: $("#filterForm").attr('action'),
+            data: $("#filterForm").serialize() + "&PageSize=" + pageSize + "&Page=" + page,
+            success: function (response) {
+                grid.dataSource.total(response.Total);
+                grid.dataSource.data(response.Data);
+            },
+            error: function (error) {
+                alert("An error occurred while fetching the data.");
+            }
+        });
+    }
+
+    function clearFormAndRefresh() {
+        // Clear out form inputs
+        $("#filterForm")[0].reset();
+
+        var grid = $("#gridSearch").data("kendoGrid");
+        // Reset the grid's current page to 1
+        grid.dataSource.page(1);
+
+        // Then submit form for server-side processing (which will now have cleared filters)
+        submitForm();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        adjustGridHeight();
+
+        $(window).resize(function () {
+            adjustGridHeight();
+        });
+
+        function adjustGridHeight() {
+            var totalPageHeight = $(window).height();
+            var otherElementsHeight = $('#header').outerHeight(true) + $('#footer').outerHeight(true); // Adjust these selectors based on your layout
+            var gridHeight = totalPageHeight - 400;
+
+            $("#gridSearch").height(gridHeight);
+        }
+    });
+</script>

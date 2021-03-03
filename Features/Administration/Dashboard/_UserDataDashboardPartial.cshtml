@@ -1,0 +1,250 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+
+@model SIDPSF.Features.Administration.Dashboard.DashboardModel
+
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="row">
+            <!--TotalNumberOfUsers-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfUsers"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfUsers</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfLoggedInUsers-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfLoggedInUsers"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfLoggedInUsers</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <i class="bx bxs-log-in-circle font-size-14"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfDisabledUsers-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium">
+                                    <label style="white-space: nowrap;" asp-for="TotalNumberOfDisabledUsers"></label>
+                                </p>
+                                <h3 class="mb-0">@Model.TotalNumberOfDisabledUsers</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="avatar-sm rounded-circle bg-secondary mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <i class="bx bx-x font-size-14"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfEnabledUsers-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfEnabledUsers"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfEnabledUsers</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="avatar-sm rounded-circle bg-secondary mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <i class="bx bx-check font-size-14"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfLockedOutUsers-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfLockedOutUsers"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfLockedOutUsers</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="avatar-sm rounded-circle bg-secondary mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <i class="bx bx-lock font-size-14"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--TotalNumberOfRequestsToday-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfRequestsToday"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfRequestsToday</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <i class="bx bxs-file-find font-size-14"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfRequestsThisHour-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfRequestsThisHour"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfRequestsThisHour</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-secondary">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <div class="icon-stack">
+                                            <i class="bx bxs-file-find font-size-14"></i>
+                                            <i class="bx bxs-hourglass-top font-size-14"></i>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfFailedLoginsToday-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfFailedLoginsToday"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfFailedLoginsToday</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="avatar-sm rounded-circle bg-secondary mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <div class="icon-stack">
+                                            <i class="bx bxs-log-in-circle font-size-14"></i>
+                                            <i class="bx bxs-x-square font-size-14"></i>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TotalNumberOfFailedLoginsLastHour-->
+            <div class="col-md-4">
+                <div class="card mini-stats-wid">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <p class="text-muted fw-medium"><label asp-for="TotalNumberOfFailedLoginsLastHour"></label></p>
+                                <h3 class="mb-0">@Model.TotalNumberOfFailedLoginsLastHour</h3>
+                            </div>
+
+                            <div class="flex-shrink-0 align-self-center">
+                                <div class="avatar-sm rounded-circle bg-secondary mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-secondary">
+                                        <i class="bx bxs-user font-size-22"></i>
+                                        <div class="icon-stack">
+                                            <i class="bx bxs-hourglass-top font-size-14"></i>
+                                            <i class="bx bxs-x-square font-size-14"></i>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .icon-stack {
+        position: relative;
+        display: inline-block;
+        font-size: 14px; /* This sets the icon size */
+    }
+
+        .icon-stack i {
+            display: block; /* This makes each icon take the full width of the container, stacking them vertically */
+            text-align: center; /* This centers the icons horizontally within their container */
+        }
+</style>

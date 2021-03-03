@@ -1,0 +1,85 @@
+@using Common
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.Grid
+@using SIDPSF._Resources
+@model SIDPSF.Features.Administration.User.UserSimpleSearchModel
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName(Model.WindowTitle);
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName(Model.FormTitle);
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName(Model.BreadCrumbRoot);
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName(Model.BreadCrumbTitle);
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+
+
+<div class="card mb-1">
+    <div class="card-body">
+        <h3 class="card-title">@ResourceRepo.GetResourceByName("Search")</h3>
+        <p class="card-title-desc">
+            @ResourceRepo.GetResourceByName("UserSimpleSearchDescription")
+        </p>
+
+        @(Html.Kendo().Grid<dynamic>(Model.GetDynamicUserData())
+            .Name("gridSimpleSearch")
+            .Excel(excel => excel
+            .FileName("User_SimpleSearch_Grid_Export.xlsx")
+            .AllPages(true)
+            .ProxyURL(@Url.Action("Excel_Export_Save", "User"))
+            )
+            .Scrollable(scrollable => scrollable.Height("350px"))
+            @*Toolbar*@
+            .ToolBar(tools =>
+            {
+                tools.Excel().Text(Grid.Excel);
+                tools.Custom().
+                HtmlAttributes(new { onclick = "location.href='" + "/User/Create" + "';return false;" })
+                .Name("btnAdd")
+                .Text(ResourceRepo.GetResourceByName("btnAdd"))
+                .IconClass("k-icon k-i-add");
+            })
+
+            .Columns(columns =>
+            {
+                columns.GenerateGridColumns(Model.UserData, ResourceRepo);
+            })
+
+            .AllowCopy(true)
+            .NoRecords(true)
+            .Messages(messages => { messages.NoRecords(Grid.NoRecords); })
+            .LoaderType(GridLoaderType.LoadingPanel)
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false)
+            .Events(events => events.Error("onError")))
+            .Filterable(f => f.Extra(false).Operators(o => o.ForString(configurator => configurator.Clear().StartsWith(Grid.StartsWith).Contains(Grid.Contains).IsNullOrEmpty(Grid.IsNullOrEmpty))))
+            .Sortable(s => s.SortMode(GridSortMode.MultipleColumn))
+            )
+    </div>
+</div>
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+
+<script>
+    function onError(e) {
+        alert("Error event triggered: " + e.errors);
+        var grid = $("#gridSimpleSearch").data("kendoGrid");
+        grid.dataSource.data([]); // Clear the grid data
+        grid.refresh(); // Refresh the grid
+        var gridContent = grid.element.find(".k-grid-content");
+        gridContent.empty()
+            .append('<div style="text-align:center;padding:10px;"><strong>' + e.errors + '</strong></div>')
+            .append('<table><colgroup></colgroup><tbody></tbody></table>'); // Reset the table structure
+    }
+</script>
+
+ 

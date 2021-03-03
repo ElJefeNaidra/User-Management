@@ -1,0 +1,1100 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\NewFolder\**" />
+    <Compile Remove="Features\AdministrationTest\**" />
+    <Compile Remove="Features\CommonRegistry\GlobalAccessTracking\**" />
+    <Compile Remove="Features\dbo\**" />
+    <Compile Remove="wwwroot\lib\inputmask\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\**" />
+    <Content Remove="Common\NewFolder\**" />
+    <Content Remove="Features\AdministrationTest\**" />
+    <Content Remove="Features\CommonRegistry\GlobalAccessTracking\**" />
+    <Content Remove="Features\dbo\**" />
+    <Content Remove="wwwroot\lib\inputmask\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\**" />
+    <EmbeddedResource Remove="Common\NewFolder\**" />
+    <EmbeddedResource Remove="Features\AdministrationTest\**" />
+    <EmbeddedResource Remove="Features\CommonRegistry\GlobalAccessTracking\**" />
+    <EmbeddedResource Remove="Features\dbo\**" />
+    <EmbeddedResource Remove="wwwroot\lib\inputmask\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\**" />
+    <None Remove="Common\NewFolder\**" />
+    <None Remove="Features\AdministrationTest\**" />
+    <None Remove="Features\CommonRegistry\GlobalAccessTracking\**" />
+    <None Remove="Features\dbo\**" />
+    <None Remove="wwwroot\lib\inputmask\**" />
+    <None Remove="wwwroot\lib\jquery-validation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Landing\Landing.cshtml.BusinessObject.cs" />
+    <Compile Remove="Features\Landing\Landing.cshtml.cs" />
+    <Compile Remove="Features\Landing\Landing.cshtml.Data.cs" />
+    <Compile Remove="Features\Landing\Landing.cshtml.Model.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Features\Landing\Landing.cshtml" />
+    <Content Remove="Features\Landing\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Features\Landing\_Layout.cshtml.css" />
+    <None Remove="Features\_LayoutSimple.cshtml.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\libs\jquery.repeater\src\" />
+    <Folder Include="wwwroot\assets\libs\jquery.repeater\test\" />
+    <Folder Include="wwwroot\assets\libs\moment\src\" />
+    <Folder Include="wwwroot\localisation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Features\Administration\Authorisation\Authorisation.cshtml" />
+    <None Include="Features\Administration\Communication\Communication.cshtml" />
+    <None Include="Features\Administration\Communication\CommunicationPagedSearch.cshtml" />
+    <None Include="Features\Administration\Configuration\Configuration.cshtml" />
+    <None Include="Features\Administration\Configuration\Services.cshtml" />
+    <None Include="Features\Administration\Dashboard\Dashboard.cshtml" />
+    <None Include="Features\Administration\GlobalAccessTracking\GlobalAccessTracking.cshtml" />
+    <None Include="Features\Administration\GlobalAccessTracking\GlobalAccessTrackingPagedSearch.cshtml" />
+    <None Include="Features\Administration\Localisation\Localisation.cshtml" />
+    <None Include="Features\Administration\Localisation\LocalisationSimpleSearch.cshtml" />
+    <None Include="Features\Administration\NonMatchingLogin\NonMatchingLogin.cshtml" />
+    <None Include="Features\Administration\NonMatchingLogin\NonMatchingLoginSimpleSearch.cshtml" />
+    <None Include="Features\Administration\Organisation\Organisation.cshtml" />
+    <None Include="Features\Administration\Organisation\OrganisationSimpleSearch.cshtml" />
+    <None Include="Features\CommonRegistry\Country\Country.cshtml" />
+    <None Include="Features\CommonRegistry\Country\CountrySimpleSearch.cshtml" />
+    <None Include="Features\CommonRegistry\Gender\Gender.cshtml" />
+    <None Include="Features\CommonRegistry\Gender\GenderSimpleSearch.cshtml" />
+    <None Include="Features\CommonRegistry\Municipality\Municipality.cshtml" />
+    <None Include="Features\CommonRegistry\Municipality\MunicipalitySimpleSearch.cshtml" />
+    <None Include="Features\CommonRegistry\Region\Region.cshtml" />
+    <None Include="Features\CommonRegistry\Region\RegionSimpleSearch.cshtml" />
+    <None Include="wwwroot\assets\css\app-dark-rtl.min.css.map" />
+    <None Include="wwwroot\assets\css\app-dark.min.css.map" />
+    <None Include="wwwroot\assets\css\app-rtl.min.css.map" />
+    <None Include="wwwroot\assets\css\app.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-dark-rtl.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-dark.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-rtl.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets\css\icons-rtl.min.css.map" />
+    <None Include="wwwroot\assets\css\icons.css.map" />
+    <None Include="wwwroot\assets\css\icons.min.css.map" />
+    <None Include="wwwroot\assets\fonts\boxicons.svg" />
+    <None Include="wwwroot\assets\fonts\boxicons.woff2" />
+    <None Include="wwwroot\assets\fonts\dripicons-v2.svg" />
+    <None Include="wwwroot\assets\fonts\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\fonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\fonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\fonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\fonts\materialdesignicons-webfont.woff2" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\images\coming-soon.svg" />
+    <None Include="wwwroot\assets\images\logo.svg" />
+    <None Include="wwwroot\assets\images\maintenance.svg" />
+    <None Include="wwwroot\assets\js\app.js" />
+    <None Include="wwwroot\assets\libs\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\assets\libs\bootstrap\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\assets\libs\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\libs\CustomScripts\CustomFunctions.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\bindings\inputmask.binding.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\global\window.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\inputmask.date.extensions.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\inputmask.extensions.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\inputmask.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\inputmask.numeric.extensions.js" />
+    <None Include="wwwroot\assets\libs\inputmask\inputmask\jquery.inputmask.js" />
+    <None Include="wwwroot\assets\libs\inputmask\jquery.inputmask.bundle.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\bindings\inputmask.binding.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\global\window.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\inputmask.date.extensions.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\inputmask.extensions.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\inputmask.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\inputmask.numeric.extensions.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\inputmask\jquery.inputmask.min.js" />
+    <None Include="wwwroot\assets\libs\inputmask\min\jquery.inputmask.bundle.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
+    <None Include="wwwroot\assets\libs\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\additional-methods.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\jquery.validate.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ar.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_az.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_bg.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_bn_BD.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ca.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_cs.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_da.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_de.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_el.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_es.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_es_AR.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_es_PE.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_et.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_eu.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_fa.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_fi.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_fr.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ge.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_gl.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_he.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_hr.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_hu.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_hy_AM.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_id.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_is.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_it.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ja.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ka.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_kk.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ko.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_lt.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_lv.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_mk.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_my.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_nl.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_no.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_pl.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_pt_BR.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_pt_PT.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ro.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ru.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sd.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_si.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sk.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sl.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sr.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sr_lat.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_sv.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_th.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_tj.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_tr.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_uk.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_ur.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_vi.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_zh.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\messages_zh_TW.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_de.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_es_CL.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_fi.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_it.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_nl.min.js" />
+    <None Include="wwwroot\assets\libs\jquery-validation\localization\methods_pt.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.blockUI\jquery.blockUI.js" />
+    <None Include="wwwroot\assets\libs\jquery.blockUI\jquery.blockUI.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\bindings\inputmask.binding.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\bindings\inputmask.binding.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\inputmask.es6.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\inputmask.es6.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\inputmask.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\inputmask.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\jquery.inputmask.js" />
+    <None Include="wwwroot\assets\libs\jquery.inputmask\jquery.inputmask.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.repeater\gruntfile.js" />
+    <None Include="wwwroot\assets\libs\jquery.repeater\jquery-1.11.1.js" />
+    <None Include="wwwroot\assets\libs\jquery.repeater\jquery.repeater.min.js" />
+    <None Include="wwwroot\assets\libs\jquery.repeater\test-post-parse.php" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.js" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.min.js" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.min.map" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.slim.js" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\assets\libs\jquery\jquery.slim.min.map" />
+    <None Include="wwwroot\assets\libs\metismenu\cjs\index.js" />
+    <None Include="wwwroot\assets\libs\metismenu\metisMenu.min.js" />
+    <None Include="wwwroot\assets\libs\metismenu\modules\index.js" />
+    <None Include="wwwroot\assets\libs\moment\ender.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\af.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-dz.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-kw.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-ly.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-ma.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-sa.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar-tn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ar.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\az.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\be.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\bg.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\bm.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\bn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\bo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\br.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\bs.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ca.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\cs.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\cv.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\cy.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\da.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\de-at.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\de-ch.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\de.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\dv.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\el.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-au.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-ca.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-gb.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-ie.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-il.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-nz.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\en-SG.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\eo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\es-do.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\es-us.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\es.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\et.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\eu.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fa.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fi.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fr-ca.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fr-ch.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fr.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\fy.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ga.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\gd.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\gl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\gom-latn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\gu.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\he.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\hi.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\hr.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\hu.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\hy-am.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\id.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\is.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\it-ch.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\it.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ja.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\jv.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ka.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\kk.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\km.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\kn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ko.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ku.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ky.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\lb.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\lo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\lt.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\lv.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\me.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\mi.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\mk.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ml.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\mn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\mr.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ms-my.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ms.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\mt.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\my.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\nb.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ne.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\nl-be.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\nl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\nn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\pa-in.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\pl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\pt-br.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\pt.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ro.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ru.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sd.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\se.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\si.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sk.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sq.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sr-cyrl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sr.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ss.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sv.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\sw.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ta.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\te.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tet.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tg.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\th.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tl-ph.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tlh.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tr.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tzl.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tzm-latn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\tzm.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ug-cn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\uk.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\ur.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\uz-latn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\uz.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\vi.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\x-pseudo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\yo.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\zh-cn.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\zh-hk.js" />
+    <None Include="wwwroot\assets\libs\moment\locale\zh-tw.js" />
+    <None Include="wwwroot\assets\libs\moment\min\locales.min.js" />
+    <None Include="wwwroot\assets\libs\moment\min\moment-with-locales.min.js" />
+    <None Include="wwwroot\assets\libs\moment\min\moment.min.js" />
+    <None Include="wwwroot\assets\libs\moment\moment.js" />
+    <None Include="wwwroot\assets\libs\moment\package.js" />
+    <None Include="wwwroot\lib\CustomScripts\CustomFunctions.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\lib\jquery.inputmask\bindings\inputmask.binding.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\bindings\inputmask.binding.min.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\inputmask.es6.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\inputmask.es6.min.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\inputmask.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\inputmask.min.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\jquery.inputmask.js" />
+    <None Include="wwwroot\lib\jquery.inputmask\jquery.inputmask.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\angular.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\jquery.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\jquery.min.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\jszip.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.actionsheet.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.actionsheet.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.all-vsdoc.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.all.min.intellisense.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.all.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.all.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.angular.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.angular.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.appbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.appbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.aspnetmvc.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.aspnetmvc.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.autocomplete.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.autocomplete.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.avatar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.avatar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.badge.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.badge.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.binder.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.binder.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.bottomnavigation.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.bottomnavigation.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.breadcrumb.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.breadcrumb.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.button.menu.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.button.menu.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.button.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.button.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.buttongroup.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.buttongroup.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.calendar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.calendar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.captcha.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.captcha.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.chat.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.chat.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.checkbox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.checkbox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.checkboxgroup.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.checkboxgroup.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.circularprogressbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.circularprogressbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.color.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.color.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.colorpicker.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.colorpicker.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.columnmenu.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.columnmenu.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.columnsorter.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.columnsorter.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.combobox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.combobox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.core.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.core.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.odata.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.odata.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.signalr.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.signalr.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.xml.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.data.xml.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz-vsdoc.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.barcode.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.barcode.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.chart.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.chart.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.core.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.core.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.diagram.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.diagram.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.gauge.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.gauge.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.map.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.map.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.min.intellisense.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.mobile.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.mobile.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.qrcode.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.qrcode.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.sparkline.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.sparkline.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.stock.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.stock.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.themes.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.themes.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.treemap.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dataviz.treemap.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dateinput.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dateinput.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.datepicker.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.datepicker.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.daterangepicker.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.daterangepicker.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.datetimepicker.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.datetimepicker.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dialog.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dialog.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dom.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dom.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.draganddrop.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.draganddrop.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.drawer.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.drawer.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.drawing.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.drawing.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdownbutton.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdownbutton.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdownlist.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdownlist.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdowntree.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.dropdowntree.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.editable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.editable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.editor.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.editor.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.excel.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.excel.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.expansionpanel.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.expansionpanel.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filebrowser.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filebrowser.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filemanager.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filemanager.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filter.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filter.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filtercell.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filtercell.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filtermenu.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.filtermenu.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.floatingactionbutton.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.floatingactionbutton.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.floatinglabel.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.floatinglabel.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.form.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.form.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.fx.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.fx.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.data.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.data.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.editors.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.editors.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.list.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.list.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.timeline.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.gantt.timeline.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.grid.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.grid.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.groupable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.groupable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.base.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.base.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.button.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.button.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.chip.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.chip.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.chiplist.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.chiplist.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.input.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.html.input.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.imagebrowser.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.imagebrowser.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.imageeditor.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.imageeditor.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.inputgroupbase.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.inputgroupbase.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.list.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.list.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.listbox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.listbox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.listview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.listview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.loader.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.loader.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.maskedtextbox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.maskedtextbox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mediaplayer.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mediaplayer.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.menu.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.menu.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile-vsdoc.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.actionsheet.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.actionsheet.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.application.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.application.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.button.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.button.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.buttongroup.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.buttongroup.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.collapsible.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.collapsible.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.drawer.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.drawer.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.listview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.listview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.loader.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.loader.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.min.intellisense.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.modalview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.modalview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.navbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.navbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.pane.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.pane.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.popover.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.popover.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.scroller.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.scroller.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.scrollview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.scrollview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.shim.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.shim.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.splitview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.splitview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.switch.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.switch.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.tabstrip.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.tabstrip.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.view.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.mobile.view.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multicolumncombobox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multicolumncombobox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multiselect.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multiselect.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multiviewcalendar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.multiviewcalendar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.notification.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.notification.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.numerictextbox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.numerictextbox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.ooxml.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.ooxml.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.orgchart.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.orgchart.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pager.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pager.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pane.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pane.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.panelbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.panelbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pdf.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pdf.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pdfviewer.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pdfviewer.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.common.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.common.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.configurator.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.configurator.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.fieldmenu.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivot.fieldmenu.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivotgrid.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.pivotgrid.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.popover.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.popover.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.popup.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.popup.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.progressbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.progressbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.radiobutton.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.radiobutton.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.radiogroup.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.radiogroup.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.rating.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.rating.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.reorderable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.reorderable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.resizable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.resizable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.responsivepanel.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.responsivepanel.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.ripple.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.ripple.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.router.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.router.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.agendaview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.agendaview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.dayview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.dayview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.monthview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.monthview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.recurrence.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.recurrence.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.timelineview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.timelineview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.view.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.view.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.yearview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scheduler.yearview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scrollview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.scrollview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.selectable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.selectable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.signature.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.signature.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.skeletoncontainer.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.skeletoncontainer.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.slider.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.slider.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.sortable.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.sortable.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.splitbutton.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.splitbutton.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.splitter.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.splitter.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.spreadsheet.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.spreadsheet.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.stepper.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.stepper.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.switch.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.switch.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tabstrip.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tabstrip.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.taskboard.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.taskboard.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.textarea.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.textarea.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.textbox.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.textbox.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tilelayout.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tilelayout.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timeline.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timeline.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timepicker.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timepicker.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timezones.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.timezones.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.toggleinputbase.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.toggleinputbase.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.toolbar.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.toolbar.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tooltip.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.tooltip.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.touch.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.touch.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treelist.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treelist.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treeview.draganddrop.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treeview.draganddrop.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treeview.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.treeview.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.upload.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.upload.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.userevents.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.userevents.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.validator.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.validator.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.view.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.view.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.virtuallist.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.virtuallist.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.web-vsdoc.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.web.min.intellisense.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.web.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.web.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.window.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.window.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.wizard.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\js\kendo.wizard.min.js.map" />
+    <None Include="wwwroot\lib\kendo-ui\js\pako_deflate.min.js" />
+    <None Include="wwwroot\lib\kendo-ui\styles\fonts\glyphs\KendoUIGlyphs.svg" />
+    <None Include="wwwroot\lib\kendo-ui\styles\fonts\glyphs\WebComponentsIcons.svg" />
+    <None Include="wwwroot\lib\kendo-ui\styles\images\kendoui.svg" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.black.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.black.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.blueopal.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.blueopal.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-main-dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-main.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-nordic.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-urban.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-v4.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap-vintage.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.bootstrap.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.classic-main-dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.classic-main.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.classic-opal.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.classic-silver.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common-bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common-fiori.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common-material.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common-nova.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common-office365.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.common.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.black.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.blueopal.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.default.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.fiori.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.flat.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.highcontrast.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.material.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.materialblack.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.metro.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.metroblack.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.moonlight.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.nova.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.office365.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.silver.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.dataviz.uniform.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-main-dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-main.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-nordic.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-ocean-blue.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-purple.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-turquoise.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default-v2.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.default.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.fiori.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.fiori.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.flat.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.flat.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.fluent-main.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.highcontrast.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.highcontrast.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-arctic.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-lime-dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-main-dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-main.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-nova.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material-v2.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.material.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.materialblack.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.materialblack.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.metro.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.metro.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.metroblack.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.metroblack.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.all.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.android.dark.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.android.light.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.blackberry.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.common.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.fiori.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.flat.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.ios.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.material.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.meego.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.nova.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.office365.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.mobile.wp8.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.moonlight.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.moonlight.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.nova.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.nova.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.office365.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.office365.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.rtl.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.silver.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.silver.mobile.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.uniform.min.css.map" />
+    <None Include="wwwroot\lib\kendo-ui\styles\kendo.uniform.mobile.min.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Telerik.Core.Export" Version="2022.3.913" />
+    <PackageReference Include="Telerik.DataSource" Version="2.1.2" />
+    <PackageReference Include="Telerik.Documents.CMapUtils" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Core" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.DrawingML" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Fixed" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Fixed.FormatProviders.Image.Skia" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Flow" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Flow.FormatProviders.Doc" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Flow.FormatProviders.Pdf" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.ImageUtils" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.OpenXml" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.Pdf" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.Xls" Version="2022.3.906" />
+    <PackageReference Include="Telerik.Documents.SpreadsheetStreaming" Version="2022.3.906" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2022.3.913" />
+    <PackageReference Include="Telerik.Web.Captcha" Version="1.1.0" />
+    <PackageReference Include="Telerik.Zip" Version="2022.3.906" />
+    <PackageReference Include="UAParser" Version="3.1.47" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="_Resources\Common.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Update="_Resources\Grid.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Grid.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="system.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\localisation\kendo.messages.en-GB.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\localisation\kendo.messages.sq-AL.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\localisation\kendo.messages.sr-Latn-RS.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="_Resources\Common.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="_Resources\Common.sq-AL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="_Resources\Common.sr-Latn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="_Resources\Grid.sr-Latn.resx">
+      <LastGenOutput>Grid.sr-Latn.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="_Resources\Grid.sq-AL.resx">
+      <LastGenOutput>Grid.sq-AL.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="_Resources\Grid.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Grid.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Documentation\Database\Administration.Authorisation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.Communication.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.GlobalAccessTracking.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.Localisation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.NonMatchingLogin.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.Organisation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.Report.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.SyncStatus.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.SystemConfig.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Administration.User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseManagement.Case.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseManagement.CaseDecision.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseManagement.CasePaymentCalculation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseManagement.CasePerson.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseManagement.CaseReimbursement.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.AgeGroup.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.Criteria.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.PaymentType.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.Relation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.TypeOfDecision.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CaseNomenclatures.TypeOfReimbursement.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Bank.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Country.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Gender.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Language.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.MaritalStatus.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Municipality.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Nationality.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Person.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Region.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\CommonRegistry.Settlement.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Constants.Operation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Constants.Status.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Constants.StatusReason.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\dbo.XREFEkosova.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.CbkExport.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.Installment.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.Transaction.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.TransactionPayment.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.TransactionPaymentDetails.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.TransactionPerson.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.TransactionReimbursement.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Finances.TypeOfTransaction.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\MeansTest.ATKRegistry.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\MeansTest.Income.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\MeansTest.TypeOfIncome.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Database\Scheme.Scheme.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Environment Setup\1. Visual Studio.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Environment Setup\2. MSSQL Server.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Environment Setup\3. Reposting Services.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Environment Setup\Support files\Test - Export SSRS Report.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Environment Setup\Support files\_TestReport.rdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\SIDPSF_Manual.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Support Files\Test -  Python.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Support Files\Test - ARC API.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Support Files\Test - ATK API.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Support Files\Test - Python TSQL file access.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documentation\Support Files\Translation of strings.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

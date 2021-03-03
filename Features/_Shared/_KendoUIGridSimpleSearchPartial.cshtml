@@ -1,0 +1,69 @@
+﻿@using SIDPSF._Resources
+<script>
+    function onError(e) {
+        alert("Error event triggered: " + e.errors);
+        var grid = $("#gridSimpleSearch").data("kendoGrid");
+        grid.dataSource.data([]); // Clear the grid data
+        grid.refresh(); // Refresh the grid
+        var gridContent = grid.element.find(".k-grid-content");
+        gridContent.empty()
+            .append('<div style="text-align:center;padding:10px;"><strong>' + e.errors + '</strong></div>')
+            .append('<table><colgroup></colgroup><tbody></tbody></table>'); // Reset the table structure
+    }
+
+    $(document).ready(function () {
+        var grid = $("#gridSimpleSearch").data("kendoGrid");
+
+        // Ensure placeholder is added
+        var toolbar = $("#gridSimpleSearch .k-grid-toolbar");
+        if ($("#totalRecords").length === 0) {
+            toolbar.append('<div style="margin-left: auto; text-align: right; margin-right:10px;"><span id="totalRecords" class="total-records">@Grid.Totalrecords </span></div>');
+        }
+
+
+        // Bind the onDataBound event handler
+        grid.bind("dataBound", function () {
+            var total = this.dataSource.total();
+            $("#totalRecords").text("@Grid.Totalrecords " + total);
+        });
+
+        // Manually trigger the dataBound event to update the count immediately
+        grid.trigger("dataBound");
+    });
+
+    $(document).ready(function () {
+        adjustGridHeight();
+
+        $(window).resize(function () {
+            adjustGridHeight();
+        });
+
+        function adjustGridHeight() {
+            var windowHeight = $(window).height();
+            var gridHeight = windowHeight - 310; // Subtracting 70 pixels from the total window height
+            // Directly setting the height of the grid element
+            $("#gridSimpleSearch").height(gridHeight);
+            // Refresh the grid to apply the height change
+            $("#gridSimpleSearch").data("kendoGrid").refresh();
+        }
+    });
+</script>
+
+<style>
+    .k-grid-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .k-grid .k-grid-toolbar {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .total-records {
+        font-weight: bold;
+        color: #333;
+    }
+
+</style>

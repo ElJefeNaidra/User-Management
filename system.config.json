@@ -1,0 +1,63 @@
+{
+  "DatabaseConfig": {
+    "ServerName": ".\\SQL2019",
+    "DatabaseName": "SIDPSFProduction052024"
+  },
+  "SystemPathsConfig": {
+    "RepositoryFolder": "C:\\SIDPSF_Repository\\",
+    "PathToDocumentationExport": "C:\\SIDPSF_Repository\\Documentation\\",
+    "PathToConfigApplicationErrorLogs": "C:\\SIDPSF_Repository\\ErrorLogs\\Application\\",
+    "PathToConfigDbContextErrorLogs": "C:\\SIDPSF_Repository\\ErrorLogs\\DBContext\\",
+    "PathToConfigSSRSErrorLogs": "C:\\SIDPSF_Repository\\ErrorLogs\\SSRS\\",
+    "PathUpload": "C:\\SIDPSF_Repository\\Upload\\",
+    "PathToManuals": "C:\\SIDPSF_Repository\\Manuals\\",
+    "PathToServicesLogs": "C:\\SIDPSF_Repository\\ServiceLogs\\"
+  },
+  "SSRSConfig": {
+    "SSRSUrl": "http://desktop/ReportServer?/",
+    "SSRSUsername": "komuna",
+    "SSRSPassword": "Astrolite$"
+  },
+  "AuthenticationConfig": {
+    "MaxNumberOfFailedLoginsBeforeLockout": 5,
+    "MaxNumberOfFailedLoginsBeforeLockoutPeriodBetweenTriesMinutes": 5,
+    "UnlockLockoutStatusAutomaticallyAfterMinutes": 5,
+    "LoggedInUserNoActivityPeriodMinutes": 10,
+    "PreventCreationOfDuplicatePersonalNoUser": false,
+    "PreventCreationOfDuplicateEmailUser": true,
+    "PasswordRequiresUppercase": false,
+    "PasswordRequiresSpecialChar": false,
+    "PasswordRequiresDigit": false,
+    "PasswordMinimumLength": 6
+
+  },
+  "ServiceConfigs": [
+    {
+      "ServiceName": "Communications Send/Proccess Service",
+      "ServiceDescription": "This service processes the pending communications in the Administration.Communication table using USP_Communication_BackgroundService_ExecuteSend",
+      "ServiceCode": "CommunicationServices_Send",
+      "ServiceSleepDelayInMinutes": 5,
+      "ServiceDateOfMonthToExecuteTask": 1,
+      "ServiceDateOfMonthToEndExecuteTaskExecution": 30,
+      "ServiceLogName": "CommunicationServices_Send_Log.txt"
+    },
+    {
+      "ServiceName": "User Maintenance Service",
+      "ServiceDescription": "Performs routine maintenance steps for User management, such as logging out users that have not recorded activity etc.",
+      "ServiceCode": "UserMaintenance",
+      "ServiceSleepDelayInMinutes": 5,
+      "ServiceDateOfMonthToExecuteTask": 1,
+      "ServiceDateOfMonthToEndExecuteTaskExecution": 30,
+      "ServiceLogName": "User_Maintenance_Log.txt"
+    },
+    {
+      "ServiceName": "Financial Period Calculation Proccessing Service",
+      "ServiceDescription": "It performs calculation of periods that have IsReadyForCalculation = 1 in the background to prevent user closing the window and killing the SQLClient connection.",
+      "ServiceCode": "Finances_Proccess_Calculations",
+      "ServiceSleepDelayInMinutes": 1,
+      "ServiceDateOfMonthToExecuteTask": 22,
+      "ServiceDateOfMonthToEndExecuteTaskExecution": 30,
+      "ServiceLogName": "Finances_Proccess_Calculations.txt"
+    }
+  ]
+}

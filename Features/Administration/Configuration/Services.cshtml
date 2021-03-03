@@ -1,0 +1,156 @@
+@using System.IO;
+@using Microsoft.AspNetCore.Http;
+@using System.Reflection
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF.Features.Administration.Configuration
+@using SIDPSF._Resources
+@model SIDPSF.Features.Administration.Configuration.ConfigurationViewModel
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+
+@foreach (var service in Model.ServiceConfigs)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-1">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed" data-bs-toggle="collapse" data-bs-target="#service-@service.ServiceCode">
+                            @ResourceRepo.GetResourceByName("ConfigurationAndStatus") - &nbsp;<u><strong>@service.ServiceName</strong></u>
+                        </h2>
+                        <div id="service-@service.ServiceCode" class="accordion-collapse">
+                            <div class="accordion-body mb-0">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped border-primary mb-1">
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceName")</td>
+                                            <td class="content-column">@service.ServiceName</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceDescription")</td>
+                                            <td class="content-column">@Html.Raw(service.ServiceDescription)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceCode")</td>
+                                            <td class="content-column">@service.ServiceCode</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceSleepDelayInMinutes")</td>
+                                            <td class="content-column">@service.ServiceSleepDelayInMinutes</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceDateOfMonthToExecuteTask")</td>
+                                            <td class="content-column">@service.ServiceDateOfMonthToExecuteTask</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceDateOfMonthToEndExecuteTaskExecution")</td>
+                                            <td class="content-column">@service.ServiceDateOfMonthToEndExecuteTaskExecution</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="label-column">@ResourceRepo.GetResourceByName("ServiceLogName")</td>
+                                            <td class="content-column">@service.ServiceLogName</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                @if (Model.ServiceLogEntries.ContainsKey(service.ServiceCode) && Model.ServiceLogEntries[service.ServiceCode].Any())
+                                {
+
+                                    <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                        <table class="table table-bordered table-striped border-primary mb-1 sticky-header">
+                                            <thead>
+                                                <tr>
+                                                    <th>@ResourceRepo.GetResourceByName("LogDateTime")</th>
+                                                    <th>@ResourceRepo.GetResourceByName("LogMessage")</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var logEntry in Model.ServiceLogEntries[service.ServiceCode].OrderByDescending(entry => entry.LogDateTime))
+                                                {
+                                                    <tr>
+                                                        <td style="width:20%;">@logEntry.LogDateTime.ToString("dd.MM.yyyy HH:mm:ss.fff")</td>
+                                                        <td style="width:80%;">@Html.Raw(logEntry.LogMessage)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<style>
+    .form-control-table {
+        background: transparent;
+        border: none;
+        padding-left: 10px;
+    }
+
+    .label-column {
+        width: 20%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        white-space: nowrap; /* Prevents word wrapping */
+        font-weight:500;
+    }
+
+    .content-column {
+        width: 80%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .checkbox-margin {
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+
+</style>
+
+<script>
+    function showDescription(propertyName) {
+        var descElement = document.getElementById(propertyName + "-desc");
+        if (descElement.style.display === "none") {
+            descElement.style.display = "block";
+        } else {
+            descElement.style.display = "none";
+        }
+    }
+</script>
+
+<style>
+    .sticky-header th {
+        position: sticky;
+        top: 0;
+        z-index: 1; /* Elevate the header above other content */
+        background-color: #e6e9ef; /* Slightly darker grey for headers */
+    }
+</style>

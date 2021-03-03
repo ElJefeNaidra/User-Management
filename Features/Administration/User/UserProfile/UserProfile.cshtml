@@ -1,0 +1,236 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.Grid
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model SIDPSF.Features.Administration.User.UserModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = ResourceRepo.GetResourceByName(Model.WindowTitle);
+    ViewData["FormTitle"] = ResourceRepo.GetResourceByName(Model.FormTitle);
+    ViewData["BreadCrumbRoot"] = ResourceRepo.GetResourceByName(Model.BreadCrumbRoot);
+    ViewData["BreadCrumbTitle"] = ResourceRepo.GetResourceByName(Model.BreadCrumbTitle);
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card mb-1">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                        @ResourceRepo.GetResourceByName("UserProfileData")
+                    </h2>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body mb-1">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped border-primary mb-1">
+                                    <!-- IdOrganisation -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="IdOrganisation"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            @if (Model.IdOrganisationDdl != null && Model.IdOrganisationDdl.Any())
+                                            {
+                                                var selectedLanguage = Model.IdOrganisationDdl.FirstOrDefault(item => item.Id == Model.IdOrganisation);
+                                                if (selectedLanguage != null)
+                                                {
+                                                    <span id="IdOrganisation" class="form-control">@selectedLanguage.Description</span>
+                                                }
+                                                else
+                                                {
+                                                    <span id="IdOrganisation" class="form-control">@Common.DdlEmpty</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span id="IdOrganisation" class="form-control">@Common.DdlEmpty</span>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                    <!-- PersonalNo -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="PersonalNo"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="PersonalNo" class="form-control">@Model.PersonalNo</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FirstName -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="FirstName"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="FirstName" class="form-control">@Model.FirstName</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- LastName -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="LastName"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="LastName" class="form-control">@Model.LastName</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Email -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="Email"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="Email" class="form-control">@Model.Email</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- PhoneNo -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="PhoneNo"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="PhoneNo" class="form-control">@Model.PhoneNo</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- WorkTitle -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="WorkTitle"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            <span id="WorkTitle" class="form-control">@Model.WorkTitle</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- IdLanguageOfUser -->
+                                    <tr>
+                                        <td class="label-column">
+                                            <label class="col-form-label" asp-for="IdLanguageOfUser"></label>
+                                        </td>
+                                        <td class="content-column">
+                                            @if (Model.IdLanguageOfUserDdl != null && Model.IdLanguageOfUserDdl.Any())
+                                            {
+                                                var selectedLanguage = Model.IdLanguageOfUserDdl.FirstOrDefault(item => item.Id == Model.IdLanguageOfUser);
+                                                if (selectedLanguage != null)
+                                                {
+                                                    <span id="IdLanguageOfUser" class="form-control">@selectedLanguage.Description</span>
+                                                }
+                                                else
+                                                {
+                                                    <span id="IdLanguageOfUser" class="form-control">@Common.DdlEmpty</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span id="IdLanguageOfUser" class="form-control">@Common.DdlEmpty</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card mb-1">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                        @ResourceRepo.GetResourceByName("UserActivityData")
+                    </h2>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body">
+                            @(Html.Kendo().Grid<dynamic>(Model.GetDynamicUserActivityData())
+                                .Name("gridSimpleSearch")
+                                .Excel(excel => excel
+                                .FileName("UserActivity_Grid_Export.xlsx")
+                                .AllPages(false)
+                                .ProxyURL(@Url.Action("Excel_Export_Save"))
+                                )
+                                .Scrollable()
+                                .ToolBar(tools =>
+                                {
+                                    tools.Excel().Text(Grid.Excel);
+                                })
+
+                                .Columns(columns =>
+                                {
+                                    columns.GenerateGridColumns(Model.UserActivityData, ResourceRepo);
+                                })
+                                .AllowCopy(true)
+                                .NoRecords(true)
+                                .Messages(messages => { messages.NoRecords(Grid.NoRecords); })
+                                .LoaderType(GridLoaderType.LoadingPanel)
+                                .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .ServerOperation(false)
+                                .Events(events => events.Error("onError"))
+                                )
+                                .Filterable(f => f.Extra(false).Operators(o => o.ForString(configurator => configurator.Clear().StartsWith(Grid.StartsWith).Contains(Grid.Contains).IsNullOrEmpty(Grid.IsNullOrEmpty))))
+                                .Sortable(s => s.SortMode(GridSortMode.MultipleColumn))
+                                )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function onError(e) {
+        alert("Error event triggered: " + e.errors);
+        var grid = $("#gridSimpleSearch").data("kendoGrid");
+        grid.dataSource.data([]); // Clear the grid data
+        grid.refresh(); // Refresh the grid
+        var gridContent = grid.element.find(".k-grid-content");
+        gridContent.empty()
+            .append('<div style="text-align:center;padding:10px;"><strong>' + e.errors + '</strong></div>')
+            .append('<table><colgroup></colgroup><tbody></tbody></table>'); // Reset the table structure
+    }
+</script>
+<style>
+    .form-control {
+        background: transparent;
+        border: none;
+    }
+
+    .label-column {
+        width: 40%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    .content-column {
+        width: 60%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+</style>
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridSimpleSearchPartial.cshtml")

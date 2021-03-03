@@ -1,0 +1,318 @@
+@using Microsoft.AspNetCore.Http;
+@using Kendo.Mvc.UI
+@using SIDPSF.Common
+@using SIDPSF.Common.StringLocalisation
+@using SIDPSF.Features
+@using SIDPSF._Resources
+@using static SIDPSF.Common.DataAccess.DBContext
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+@model SIDPSF.Features.Administration.GlobalAccessTracking.GlobalAccessTrackingModel;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+
+@{
+    Layout = "~/Features/_Layout.cshtml";
+    ViewData["WindowTitle"] = Model.WindowTitle;
+    ViewData["FormTitle"] = Model.FormTitle;
+    ViewData["BreadCrumbRoot"] = Model.BreadCrumbRoot;
+    ViewData["BreadCrumbTitle"] = Model.BreadCrumbTitle;
+}
+
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_TopMessagesPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationScriptsPartial.cshtml")
+@await Html.PartialAsync("~/Features/_Shared/_ValidationSummaryPartial.cshtml")
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card mb-1">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-button fw-medium text-light bg-secondary border-bottom text-uppercase collapsed">
+                        @ResourceRepo.GetResourceByName("GlobalAccessTrackingData")
+                    </h2>
+                    <div class="accordion-collapse">
+                        <div class="accordion-body mb-1">
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-striped border-primary mb-1">
+                                <!-- DateOfRecord -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="DateOfRecord"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="DateOfRecord" class="form-control form-control-table">@Model.DateOfRecord</span>
+                                    </td>
+                                </tr>
+
+                                <!-- GlobalAccessTrackingGUID -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="GlobalAccessTrackingGUID"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="GlobalAccessTrackingGUID" class="form-control form-control-table">@Model.GlobalAccessTrackingGUID</span>
+                                    </td>
+                                </tr>
+
+                                <!-- IdUser -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="IdUser"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        @if (Model.IdUserDdl != null && Model.IdUserDdl.Any())
+                                        {
+                                            var selectedLanguage = Model.IdUserDdl.FirstOrDefault(item => item.Id == Model.IdUser);
+                                            if (selectedLanguage != null)
+                                            {
+                                                <span id="IdUser" class="form-control form-control-table">@selectedLanguage.Description</span>
+                                            }
+                                            else
+                                            {
+                                                <span id="IdUser" class="form-control form-control-table">@Common.DdlEmpty</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span id="IdUser" class="form-control form-control-table">@Common.DdlEmpty</span>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <!-- IdAuthorisation -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="IdAuthorisation"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        @if (Model.IdAuthorisationDdl != null && Model.IdAuthorisationDdl.Any())
+                                        {
+                                            var selectedLanguage = Model.IdAuthorisationDdl.FirstOrDefault(item => item.Id == Model.IdAuthorisation);
+                                            if (selectedLanguage != null)
+                                            {
+                                                <span id="IdAuthorisation" class="form-control form-control-table">@selectedLanguage.Description</span>
+                                            }
+                                            else
+                                            {
+                                                <span id="IdAuthorisation" class="form-control form-control-table">@Common.DdlEmpty</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span id="IdAuthorisation" class="form-control form-control-table">@Common.DdlEmpty</span>
+                                        }
+                                    </td>
+                                </tr>
+
+                                <!-- SPExecuted -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="SPExecuted"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="SPExecuted" class="form-control form-control-table">@Model.SPExecuted</span>
+                                    </td>
+                                </tr>
+
+                                <!-- ControllerName -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="ControllerName"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="ControllerName" class="form-control form-control-table">@Model.ControllerName</span>
+                                    </td>
+                                </tr>
+
+                                <!-- ControllerAction -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="ControllerAction"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="ControllerAction" class="form-control form-control-table">@Model.ControllerAction</span>
+                                    </td>
+                                </tr>
+
+                                <!-- QueryString -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="QueryString"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="QueryString" class="form-control form-control-table">@Model.QueryString</span>
+                                    </td>
+                                </tr>
+
+                                <!-- IPAddress -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="IPAddress"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="IPAddress" class="form-control form-control-table">@Model.IPAddress</span>
+                                    </td>
+                                </tr>
+
+                                <!-- IsLocalIP -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="IsLocalIP"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <input type="checkbox" asp-for="IsLocalIP" id="IsLocalIP" class="form-check-input large-checkbox checkbox-margin" disabled />
+                                    </td>
+                                </tr>
+
+                                <!-- UserAgent -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="UserAgent"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="UserAgent" class="form-control form-control-table">@Model.UserAgent</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Browser -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="Browser"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="Browser" class="form-control form-control-table">@Model.Browser</span>
+                                    </td>
+                                </tr>
+
+                                <!-- OperatingSystem -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="OperatingSystem"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="OperatingSystem" class="form-control form-control-table">@Model.OperatingSystem</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Referrer -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="Referrer"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="Referrer" class="form-control form-control-table">@Model.Referrer</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Languages -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="Languages"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="Languages" class="form-control form-control-table">@Model.Languages</span>
+                                    </td>
+                                </tr>
+
+                                <!-- IsHttps -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="IsHttps"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <input type="checkbox" asp-for="IsHttps" id="IsHttps" class="form-check-input large-checkbox checkbox-margin" disabled />
+                                    </td>
+                                </tr>
+
+                                <!-- Protocol -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="Protocol"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="Protocol" class="form-control form-control-table">@Model.Protocol</span>
+                                    </td>
+                                </tr>
+
+                                <!-- SessionID -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="SessionID"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <span id="SessionID" class="form-control form-control-table">@Model.SessionID</span>
+                                    </td>
+                                </tr>
+
+                                <!-- SessionContent -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="SessionContent"></label>
+                                    </td>
+                                    <td class="content-column">
+                                        <textarea asp-for="SessionContent" class="form-control form-control-table scrollable-textarea limited-resize-textarea" id="SessionContent" disabled></textarea>
+                                    </td>
+                                </tr>
+
+                                <!-- RequestInfo -->
+                                <tr>
+                                    <td class="label-column">
+                                        <label class="col-form-label" asp-for="RequestInfo"></label>
+                                    </td>
+                                    <td class="content-column">
+                                            <textarea asp-for="RequestInfo" class="form-control form-control-table scrollable-textarea limited-resize-textarea" id="RequestInfo" disabled></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            </div>
+                            @await Html.PartialAsync("~/Features/_SharedMVC/_ButtonsCRUDPartial.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    if (Model.crudOp == CrudOp.Read)
+    {
+        @await Html.PartialAsync("~/Features/_SharedMVC/_AuditDataPartial.cshtml")
+        @await Html.PartialAsync("~/Features/_SharedMVC/_HistoryGridPartial.cshtml")
+    }
+}
+
+@await Html.PartialAsync("~/Features/_Shared/_KendoUIGridAdditionalPartial.cshtml")
+
+
+<style>
+    .form-control-table {
+        background: transparent;
+        border: none;
+        padding-left: 10px;
+    }
+
+    .label-column {
+        width: 30%; /* Adjust the percentage based on your preference */
+        padding-left: 10px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    .content-column {
+        width: 70%; /* Adjust the percentage based on your preference */
+        padding-left: 1px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    .checkbox-margin {
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+
+</style>

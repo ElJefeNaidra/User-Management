@@ -1,0 +1,196 @@
+﻿
+        /// <summary>
+        /// Retrieves generic grid data based on specified filtering criteria.
+        /// </summary>
+        /// <param name="request">The data source request containing pagination and other request parameters.</param>
+        /// <param name="filter">A string containing filtering criteria in the format "PropertyName=Value&amp;PropertyName2=Value2...". 
+        /// Supports date values in both default .NET Core format and "dd/MM/yyyy" format.</param>
+        /// <returns>A JSON result containing the filtered data along with the total number of rows and any errors, if encountered.</returns>
+        /// <remarks>
+        /// This action method is designed to dynamically map filter criteria provided as a string 
+        /// to a filter model object which is then passed on to the data retrieval layer. 
+        /// It supports multiple filter criteria separated by the &amp; character.
+        /// </remarks>
+
+        
+        [HttpPost]
+        public async Task<IActionResult> GetGenericGridData(
+            [DataSourceRequest] DataSourceRequest request,
+            string filter)
+        {
+            PersonGridModel.FilterModel filterModel = new();
+            filterModel.ServerOperation = false;
+            filterModel.PageSize = request.PageSize;
+            filterModel.PageNumber = request.Page;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                // Split on the '&' character to get individual filter criteria
+                var filters = filter.Split('&');
+
+                foreach (var singleFilter in filters)
+                {
+                    var parts = singleFilter.Split('=');
+
+                    // If it doesn't split into two parts, then the format is incorrect.
+                    if (parts.Length != 2)
+                    {
+                        return BadRequest($"Invalid filter format: {singleFilter}");
+                    }
+
+                    var propertyName = parts[0].Trim();
+                    var valueString = parts[1].Trim();
+
+                    var prop = filterModel.GetType().GetProperty(propertyName);
+                    if (prop == null)
+                    {
+                        return BadRequest($"Unknown property: {propertyName}");
+                    }
+
+                    if (prop.CanWrite)
+                    {
+                        try
+                        {
+                            if (prop.PropertyType == typeof(DateTime))
+                            {
+                                // Try to parse using the default formats
+                                if (!DateTime.TryParse(valueString, out DateTime dateValue))
+                                {
+                                    // If parsing failed, try the specific format
+                                    dateValue = DateTime.ParseExact(valueString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                prop.SetValue(filterModel, dateValue);
+                            }
+                            else
+                            {
+                                var value = Convert.ChangeType(valueString, prop.PropertyType);
+                                prop.SetValue(filterModel, value);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            return BadRequest($"Invalid value for property {propertyName}: {valueString}");
+                        }
+                    }
+                }
+            }
+
+            var (Data, TotalRows, ResponseInfo) = await _dalServices.GridAsync<PersonGridModel.DataModel>
+            (
+                SP + "Grid",
+                filterModel
+            );
+
+            if (ResponseInfo.HasError || Data == null)
+            {
+                return Json(new { error = true, message = ResponseInfo.ErrorMessage });
+            }
+
+            DataSourceResult result = new DataSourceResult
+            {
+                Data = Data,
+                Total = TotalRows
+            };
+
+            return Json(result);
+        }
+
+
+        /// <summary>
+        /// Retrieves generic grid data based on specified filtering criteria for History table.
+        /// </summary>
+        /// <param name="request">The data source request containing pagination and other request parameters.</param>
+        /// <param name="filter">A string containing filtering criteria in the format "PropertyName=Value&amp;PropertyName2=Value2...". 
+        /// Supports date values in both default .NET Core format and "dd/MM/yyyy" format.</param>
+        /// <returns>A JSON result containing the filtered data along with the total number of rows and any errors, if encountered.</returns>
+        /// <remarks>
+        /// This action method is designed to dynamically map filter criteria provided as a string 
+        /// to a filter model object which is then passed on to the data retrieval layer. 
+        /// It supports multiple filter criteria separated by the &amp; character.
+        /// </remarks>
+
+        
+        [HttpPost]
+        public async Task<IActionResult> GetHistoryGridData(
+            [DataSourceRequest] DataSourceRequest request,
+            string filter)
+        {
+            PersonGridModel.FilterModel filterModel = new();
+            filterModel.ServerOperation = false;
+            filterModel.PageSize = request.PageSize;
+            filterModel.PageNumber = request.Page;
+            filterModel.GetHistory = true;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                // Split on the '&' character to get individual filter criteria
+                var filters = filter.Split('&');
+
+                foreach (var singleFilter in filters)
+                {
+                    var parts = singleFilter.Split('=');
+
+                    // If it doesn't split into two parts, then the format is incorrect.
+                    if (parts.Length != 2)
+                    {
+                        return BadRequest($"Invalid filter format: {singleFilter}");
+                    }
+
+                    var propertyName = parts[0].Trim();
+                    var valueString = parts[1].Trim();
+
+                    var prop = filterModel.GetType().GetProperty(propertyName);
+                    if (prop == null)
+                    {
+                        return BadRequest($"Unknown property: {propertyName}");
+                    }
+
+                    if (prop.CanWrite)
+                    {
+                        try
+                        {
+                            if (prop.PropertyType == typeof(DateTime))
+                            {
+                                // Try to parse using the default formats
+                                if (!DateTime.TryParse(valueString, out DateTime dateValue))
+                                {
+                                    // If parsing failed, try the specific format
+                                    dateValue = DateTime.ParseExact(valueString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                prop.SetValue(filterModel, dateValue);
+                            }
+                            else
+                            {
+                                var value = Convert.ChangeType(valueString, prop.PropertyType);
+                                prop.SetValue(filterModel, value);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            return BadRequest($"Invalid value for property {propertyName}: {valueString}");
+                        }
+                    }
+                }
+            }
+
+            var (Data, TotalRows, ResponseInfo) = await _dalServices.GridAsync<PersonGridModel.DataModel>
+            (
+                SP + "Grid",
+                filterModel
+            );
+
+            if (ResponseInfo.HasError || Data == null)
+            {
+                return Json(new { error = true, message = ResponseInfo.ErrorMessage });
+            }
+
+            DataSourceResult result = new DataSourceResult
+            {
+                Data = Data,
+                Total = TotalRows
+            };
+
+            return Json(result);
+        }
+    }
+}
