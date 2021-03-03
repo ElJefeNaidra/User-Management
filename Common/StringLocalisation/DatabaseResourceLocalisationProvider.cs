@@ -6,7 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 /// Last updated: 4th May 2022 Ardian_K.
 /// </summary>
 
-namespace SIDPSF.Common.StringLocalisation
+namespace UserManagement.Common.StringLocalisation
 {
     public class DatabaseResourceLocalisationProvider
     {

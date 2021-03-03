@@ -1,8 +1,8 @@
-﻿using SIDPSF.Common.Generics;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Common.DataAccess.DBContext;
+﻿using UserManagement.Common.Generics;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Common.Razor
+namespace UserManagement.Common.Razor
 {
     public class FormTranslationHelper
     {

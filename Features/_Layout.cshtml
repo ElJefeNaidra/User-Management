@@ -1,8 +1,8 @@
-﻿@using SIDPSF.Common
+﻿@using UserManagement.Common
 <!-- ========== Left Sidebar Start ========== -->
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 
 
 <!DOCTYPE html>
@@ -152,7 +152,7 @@
     <div class="container-fluid">
         <header class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SIDPSF</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">UserManagement</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -195,7 +195,7 @@
 
                 <footer class="border-top footer text-muted mt-3">
                     <div class="container">
-                        &copy; 2023 - SIDPSF - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                        &copy; 2023 - UserManagement - <a asp-area="" asp-page="/Privacy">Privacy</a>
                     </div>
                 </footer>
             </main>

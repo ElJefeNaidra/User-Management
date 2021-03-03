@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using SIDPSF.Common.CustomDateTimeModelBinding.Core.Helpers;
+using UserManagement.Common.CustomDateTimeModelBinding.Core.Helpers;
 using System;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core.Converters
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core.Converters
 {
     public class CustomDateTimeConverter : DateTimeConverterBase
     {

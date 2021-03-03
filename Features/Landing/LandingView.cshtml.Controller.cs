@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using SIDPSF.Common.DataAccess;
-using static SIDPSF.Common.Attributes.Tools;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using UserManagement.Common.DataAccess;
+using static UserManagement.Common.Attributes.Tools;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
 
-namespace SIDPSF.Features.SystemAdmin.LandingView
+namespace UserManagement.Features.SystemAdmin.LandingView
 {
     public class LandingViewController : Controller
     {

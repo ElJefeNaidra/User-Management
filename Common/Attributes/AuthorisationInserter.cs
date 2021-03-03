@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Reflection;
 
-namespace SIDPSF.Common.Attributes
+namespace UserManagement.Common.Attributes
 {
     public class Tools
     {

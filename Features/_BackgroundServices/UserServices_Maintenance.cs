@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
 /// <summary>
 /// Executes the User Maintenance tasks in the background

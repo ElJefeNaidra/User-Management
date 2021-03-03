@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 using System.Reflection;
 
-namespace SIDPSF.Common.DataAccess
+namespace UserManagement.Common.DataAccess
 {
     public partial class DBContext
     {

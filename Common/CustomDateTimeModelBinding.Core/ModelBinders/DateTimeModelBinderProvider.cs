@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using System;
 using System.Linq;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core.ModelBinders
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core.ModelBinders
 {
     public class DateTimeModelBinderProvider : IModelBinderProvider
     {

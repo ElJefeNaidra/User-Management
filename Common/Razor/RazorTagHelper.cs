@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace SIDPSF.Common.Razor
+namespace UserManagement.Common.Razor
 {
     [HtmlTargetElement("input", Attributes = "asp-for")]
     [HtmlTargetElement("textarea", Attributes = "asp-for")]

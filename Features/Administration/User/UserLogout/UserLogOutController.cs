@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.RequestFilters;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.RequestFilters;
 using System.Data;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     [TypeFilter(typeof(RequestAuthorisationBasicFilter))]
     public class UserLogOutController : Controller

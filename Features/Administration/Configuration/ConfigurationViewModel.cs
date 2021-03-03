@@ -1,7 +1,7 @@
-using SIDPSF.Features.SharedMVC;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using UserManagement.Features.SharedMVC;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
-namespace SIDPSF.Features.Administration.Configuration
+namespace UserManagement.Features.Administration.Configuration
 {
     public class ConfigurationViewModel : BaseCrudModel
     {

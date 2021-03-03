@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using UAParser;
 
-namespace SIDPSF.Common.RequestFilters
+namespace UserManagement.Common.RequestFilters
 {
     public interface IUserAgentService
     {

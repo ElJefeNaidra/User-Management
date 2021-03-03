@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.Organisation
+namespace UserManagement.Features.Administration.Organisation
 {
     public partial class OrganisationController : Controller
     {

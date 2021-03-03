@@ -1,4 +1,4 @@
-﻿namespace SIDPSF.Common.Attributes
+﻿namespace UserManagement.Common.Attributes
 {
     /// <summary>
     /// A decorator telling the developer that the controller method is an API rather than

@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
-namespace SIDPSF.Common.Generics
+namespace UserManagement.Common.Generics
 {
     public class GenericGetDdlDataDataLayer
     {

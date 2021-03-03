@@ -1,5 +1,5 @@
 ﻿
-namespace SIDPSF.Features.Administration.Authorisation
+namespace UserManagement.Features.Administration.Authorisation
 {
     public partial class AuthorisationModel
     {

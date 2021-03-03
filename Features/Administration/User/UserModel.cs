@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using SIDPSF.Common;
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.StringLocalisation;
-using SIDPSF.Features.SharedMVC;
+using UserManagement.Common;
+using UserManagement.Common.Generics;
+using UserManagement.Common.StringLocalisation;
+using UserManagement.Features.SharedMVC;
 using System.ComponentModel.DataAnnotations;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     public partial class UserModel : BaseCrudModel
     {

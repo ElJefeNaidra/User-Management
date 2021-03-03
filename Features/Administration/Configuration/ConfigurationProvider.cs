@@ -1,11 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
-using SIDPSF.Common.StringLocalisation;
-using SIDPSF.Features.Administration.Configuration;
+using UserManagement.Common.StringLocalisation;
+using UserManagement.Features.Administration.Configuration;
 using System.Net;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
-namespace SIDPSF.Features.Administration
+namespace UserManagement.Features.Administration
 {
     public class ConfigurationProvider
     {

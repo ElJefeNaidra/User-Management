@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using UserManagement.Common.DataAccess;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
-namespace SIDPSF.Features.Administration.Document
+namespace UserManagement.Features.Administration.Document
 {
     [TypeFilter(typeof(RequestAuthorisationBasicFilter))]
 

@@ -1,13 +1,13 @@
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.Grid;
-using SIDPSF.Common.Razor;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.Grid;
+using UserManagement.Common.Razor;
 using System.Data;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
-namespace SIDPSF.Features.Administration.Communication
+namespace UserManagement.Features.Administration.Communication
 {
     [Parent("Administration", "Administration", "Administrimi", "Administracija")]
     public partial class CommunicationPagedSearchController : Controller

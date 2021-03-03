@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.Razor;
-using static SIDPSF.Common.DataAccess.DBContext;
+using UserManagement.Common.Razor;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.GlobalAccessTracking
+namespace UserManagement.Features.Administration.GlobalAccessTracking
 {
     public partial class GlobalAccessTrackingController : Controller
     {

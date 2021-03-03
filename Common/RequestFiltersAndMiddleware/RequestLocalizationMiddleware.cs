@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace SIDPSF.Common.RequestFilters
+namespace UserManagement.Common.RequestFilters
 {
     public static class RequestLocalizationCookiesMiddlewareExtensions
     {

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.Razor;
-using static SIDPSF.Common.DataAccess.DBContext;
+using UserManagement.Common.Razor;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.CommonRegistry.Language
+namespace UserManagement.Features.CommonRegistry.Language
 {
     public partial class LanguageController : Controller
     {

@@ -1,13 +1,13 @@
 @using Microsoft.AspNetCore.Http;
 @using Kendo.Mvc.UI
-@using SIDPSF.Common
-@using SIDPSF.Common.StringLocalisation
-@using SIDPSF.Features
-@using SIDPSF._Resources
-@model SIDPSF.Features.Administration.Dashboard.DashboardModel
+@using UserManagement.Common
+@using UserManagement.Common.StringLocalisation
+@using UserManagement.Features
+@using UserManagement._Resources
+@model UserManagement.Features.Administration.Dashboard.DashboardModel
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 
 @{
     Layout = "~/Features/_Layout.cshtml";

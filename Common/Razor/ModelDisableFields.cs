@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SIDPSF.Common.Razor
+namespace UserManagement.Common.Razor
 {
     public class ModelDisableFields
     {

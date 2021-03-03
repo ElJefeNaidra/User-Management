@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common;
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.StringLocalisation;
-using SIDPSF.Features.SharedMVC;
+using UserManagement.Common;
+using UserManagement.Common.Generics;
+using UserManagement.Common.StringLocalisation;
+using UserManagement.Features.SharedMVC;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIDPSF.Features.Administration.GlobalAccessTracking
+namespace UserManagement.Features.Administration.GlobalAccessTracking
 {
     public partial class GlobalAccessTrackingModel : BaseCrudModel
     {

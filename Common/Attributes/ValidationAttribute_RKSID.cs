@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIDPSF.Common
+namespace UserManagement.Common
 {
     public class ValidationAttribute_RKSID : ValidationAttribute, IClientModelValidator
     {

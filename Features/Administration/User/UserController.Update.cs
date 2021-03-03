@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Features.Administration.Document;
-using static SIDPSF.Common.DataAccess.DBContext;
+using UserManagement.Features.Administration.Document;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     public partial class UserController : Controller
     {

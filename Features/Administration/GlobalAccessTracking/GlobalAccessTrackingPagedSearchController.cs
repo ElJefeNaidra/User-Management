@@ -5,13 +5,13 @@ using System;
 using System.Data;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using SIDPSF.Features.Administration.Communication;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.Razor;
-using SIDPSF.Common.Grid;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using UserManagement.Features.Administration.Communication;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.Razor;
+using UserManagement.Common.Grid;
 
-namespace SIDPSF.Features.Administration.GlobalAccessTracking
+namespace UserManagement.Features.Administration.GlobalAccessTracking
 {
     [Parent("Administration", "Administration", "Administrimi", "Administracija")]
 

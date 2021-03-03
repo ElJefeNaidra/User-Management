@@ -1,11 +1,11 @@
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.Grid;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.Generics;
+using UserManagement.Common.Grid;
+using UserManagement.Common.StringLocalisation;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Text.Json.Serialization;
 
-namespace SIDPSF.Features.Administration.Communication
+namespace UserManagement.Features.Administration.Communication
 {
     public class CommunicationPagedSearchModel
     {

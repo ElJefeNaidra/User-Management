@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core.ModelBinders
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core.ModelBinders
 {
     public class DateTimeModelBinderAttribute : ModelBinderAttribute
     {

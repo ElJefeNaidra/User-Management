@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http;
-@using SIDPSF.Common
-@using SIDPSF.Common.StringLocalisation
-@using static SIDPSF.Common.DataAccess.DBContext
-@model SIDPSF.Features.SharedMVC.BaseCrudModel;
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@using UserManagement.Common
+@using UserManagement.Common.StringLocalisation
+@using static UserManagement.Common.DataAccess.DBContext
+@model UserManagement.Features.SharedMVC.BaseCrudModel;
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 @{
     ViewData["WindowTitle"] = ResourceRepo.GetResourceByName(Model.WindowTitle);
     ViewData["FormTitle"] = ResourceRepo.GetResourceByName(Model.FormTitle);

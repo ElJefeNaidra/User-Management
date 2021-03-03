@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SIDPSF.Common.StringLocalisation
+namespace UserManagement.Common.StringLocalisation
 {
     /// <summary>
     /// A_Kras: An extension/override of [Display] attribute using a database table to retrieve

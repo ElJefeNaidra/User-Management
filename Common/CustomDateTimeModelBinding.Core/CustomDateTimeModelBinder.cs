@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core
 {
     public class CustomDateTimeModelBinder : IModelBinder
     {

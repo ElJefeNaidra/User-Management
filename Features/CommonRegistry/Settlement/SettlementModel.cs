@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.StringLocalisation;
-using SIDPSF.Features.SharedMVC;
+using UserManagement.Common.Generics;
+using UserManagement.Common.StringLocalisation;
+using UserManagement.Features.SharedMVC;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIDPSF.Features.CommonRegistry.Settlement
+namespace UserManagement.Features.CommonRegistry.Settlement
 {
     public partial class SettlementModel : BaseCrudModel
     {

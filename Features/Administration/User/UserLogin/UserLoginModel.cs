@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.StringLocalisation;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIDPSF.Features.Administration.User.UserLogin
+namespace UserManagement.Features.Administration.User.UserLogin
 {
     public class UserLoginModel
     {

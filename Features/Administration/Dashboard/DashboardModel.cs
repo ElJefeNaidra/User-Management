@@ -1,8 +1,8 @@
-﻿using SIDPSF.Common.Grid;
-using SIDPSF.Common.StringLocalisation;
+﻿using UserManagement.Common.Grid;
+using UserManagement.Common.StringLocalisation;
 using System.Data;
 
-namespace SIDPSF.Features.Administration.Dashboard
+namespace UserManagement.Features.Administration.Dashboard
 {
     public partial class DashboardModel
     {

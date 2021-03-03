@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.Other;
-using SIDPSF.Common.Security;
-using SIDPSF.Features.Administration.Document;
-using static SIDPSF.Common.DataAccess.DBContext;
+using UserManagement.Common.Other;
+using UserManagement.Common.Security;
+using UserManagement.Features.Administration.Document;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     public partial class UserController : Controller
     {

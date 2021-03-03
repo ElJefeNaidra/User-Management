@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace SIDPSF.Common.Other
+namespace UserManagement.Common.Other
 {
     public class RandomStringGenerator
     {

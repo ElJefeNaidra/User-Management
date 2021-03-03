@@ -1,8 +1,8 @@
-﻿@using SIDPSF.Common
+﻿@using UserManagement.Common
 <!-- ========== Left Sidebar Start ========== -->
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 
 @{
     var menuStructure = HttpContextAccessor.HttpContext.Session.GetString("MenuStructure");

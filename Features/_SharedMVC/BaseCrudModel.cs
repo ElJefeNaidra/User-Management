@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.Grid;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.Generics;
+using UserManagement.Common.Grid;
+using UserManagement.Common.StringLocalisation;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Text.Json.Serialization;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.SharedMVC
+namespace UserManagement.Features.SharedMVC
 {
     public class BaseCrudModel
     {

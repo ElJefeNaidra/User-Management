@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Common.DataAccess.DBContext;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.Razor;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Common.DataAccess.DBContext;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.Razor;
 
-namespace SIDPSF.Features.Administration.Localisation
+namespace UserManagement.Features.Administration.Localisation
 {
     [Parent("Administration", "Administration", "Administrimi", "Administracija")]
     [TypeFilter(typeof(RequestAuthorisationFilter))]

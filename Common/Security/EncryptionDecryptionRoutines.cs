@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SIDPSF.Common.Security
+namespace UserManagement.Common.Security
 {
     public static class EncryptionDecryptionRoutines
     {

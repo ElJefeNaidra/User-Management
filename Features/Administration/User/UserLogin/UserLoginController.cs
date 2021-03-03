@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.RequestFilters;
-using SIDPSF.Common.Security;
-using SIDPSF.Features.Administration.NonMatchingLogin;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.RequestFilters;
+using UserManagement.Common.Security;
+using UserManagement.Features.Administration.NonMatchingLogin;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
-namespace SIDPSF.Features.Administration.User.UserLogin
+namespace UserManagement.Features.Administration.User.UserLogin
 {
     [RequestAuthorisationNoCheckFilter]
     public partial class UserLoginController : Controller

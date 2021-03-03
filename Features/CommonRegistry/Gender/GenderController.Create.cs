@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.CommonRegistry.Gender
+namespace UserManagement.Features.CommonRegistry.Gender
 {
     public partial class GenderController : Controller
     {

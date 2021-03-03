@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Caching.Memory;
-using SIDPSF.Common.CustomDateTimeModelBinding.Core;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.RequestFilters;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.CustomDateTimeModelBinding.Core;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.RequestFilters;
+using UserManagement.Common.StringLocalisation;
 using System.Dynamic;
 using System.Globalization;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,7 +89,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     }
 
     // Add your custom culture provider
-    options.RequestCultureProviders.Add(new SIDPSF.Common.RequestFilters.CustomRequestCultureProvider());
+    options.RequestCultureProviders.Add(new UserManagement.Common.RequestFilters.CustomRequestCultureProvider());
 });
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
@@ -131,7 +131,7 @@ builder.Services.AddKendo();
 builder.Services.AddScoped<IUserAgentService, UserAgentService>();
 
 // Add hosted services
-builder.Services.AddHostedService<CommunicationServices_Send>(provider => new CommunicationServices_Send(connectionString, systemConfigService));
+//builder.Services.AddHostedService<CommunicationServices_Send>(provider => new CommunicationServices_Send(connectionString, systemConfigService));
 builder.Services.AddHostedService<UserServices_Maintenance>(provider => new UserServices_Maintenance(connectionString, systemConfigService));
 var app = builder.Build();
 

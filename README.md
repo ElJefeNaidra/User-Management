@@ -1,2 +1,2 @@
 # SIDPS
-Aplikacioni SIDPSF - Shtesat e fëmijëve dhe Lehonat
+Aplikacioni UserManagement - Shtesat e fëmijëve dhe Lehonat

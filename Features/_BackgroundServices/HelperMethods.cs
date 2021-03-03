@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SIDPSF.Features._BackgroundServices
+namespace UserManagement.Features._BackgroundServices
 {
     public class HelperMethods
     {

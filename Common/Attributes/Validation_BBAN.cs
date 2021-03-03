@@ -1,4 +1,4 @@
-﻿namespace SIDPSF.Common
+﻿namespace UserManagement.Common
 {
     public class Validation_BBAN
     {

@@ -1,4 +1,4 @@
-﻿namespace SIDPSF.Common.DataAccess
+﻿namespace UserManagement.Common.DataAccess
 {
     public partial class DBContext
     {

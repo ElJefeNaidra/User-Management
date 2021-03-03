@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.Administration.Localisation
+namespace UserManagement.Features.Administration.Localisation
 {
     public partial class LocalisationController : Controller
     {

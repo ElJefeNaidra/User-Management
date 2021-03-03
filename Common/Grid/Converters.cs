@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Dynamic;
 
-namespace SIDPSF.Common.Grid
+namespace UserManagement.Common.Grid
 {
     public class Converters
     {

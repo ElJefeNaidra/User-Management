@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.CommonRegistry.Country
+namespace UserManagement.Features.CommonRegistry.Country
 {
     public partial class CountryController : Controller
     {

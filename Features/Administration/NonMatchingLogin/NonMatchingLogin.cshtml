@@ -1,14 +1,14 @@
 @using Microsoft.AspNetCore.Http;
 @using Kendo.Mvc.UI
-@using SIDPSF.Common
-@using SIDPSF.Features
-@using SIDPSF._Resources
-@using static SIDPSF.Common.DataAccess.DBContext
+@using UserManagement.Common
+@using UserManagement.Features
+@using UserManagement._Resources
+@using static UserManagement.Common.DataAccess.DBContext
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
-@model SIDPSF.Features.Administration.NonMatchingLogin.NonMatchingLoginModel;
+@model UserManagement.Features.Administration.NonMatchingLogin.NonMatchingLoginModel;
 
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 
 @{
     Layout = "~/Features/_Layout.cshtml";

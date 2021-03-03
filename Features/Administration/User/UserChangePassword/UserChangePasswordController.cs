@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using SIDPSF.Common.RequestFilters;
-using SIDPSF.Common.Security;
+using UserManagement.Common.DataAccess;
+using UserManagement.Common.RequestFilters;
+using UserManagement.Common.Security;
 using System.Data;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
-using static SIDPSF.Features.Administration.ConfigurationProvider;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using static UserManagement.Features.Administration.ConfigurationProvider;
 
-namespace SIDPSF.Features.Administration.User.UserChangePassword
+namespace UserManagement.Features.Administration.User.UserChangePassword
 {
     [TypeFilter(typeof(RequestAuthorisationBasicFilter))]
     public partial class UserChangePasswordController : Controller

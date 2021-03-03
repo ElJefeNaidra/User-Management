@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core.Helpers
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core.Helpers
 {
     public static class Helper
     {

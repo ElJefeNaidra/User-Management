@@ -1,7 +1,7 @@
-using SIDPSF.Common.Grid;
+using UserManagement.Common.Grid;
 using System.Data;
 
-namespace SIDPSF.Features.CommonRegistry.Country
+namespace UserManagement.Features.CommonRegistry.Country
 {
     // Implementation of Search Model for Simple no ServerOperation Grids
     public class CountrySimpleSearchModel

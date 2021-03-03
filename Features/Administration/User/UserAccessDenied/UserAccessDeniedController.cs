@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using UserManagement.Common.DataAccess;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
 
-namespace SIDPSF.Features.Administration.User.UserAccessDenied
+namespace UserManagement.Features.Administration.User.UserAccessDenied
 {
     [TypeFilter(typeof(RequestAuthorisationBasicFilter))]
     public partial class UserAccessDeniedController : Controller

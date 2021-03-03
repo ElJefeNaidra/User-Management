@@ -1,4 +1,4 @@
-﻿namespace SIDPSF.Features.Administration.User
+﻿namespace UserManagement.Features.Administration.User
 {
     public class Utilities
     {

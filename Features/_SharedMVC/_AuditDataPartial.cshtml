@@ -1,15 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Kendo.Mvc.UI
-@using SIDPSF.Common
-@using SIDPSF.Common.StringLocalisation
-@using SIDPSF.Features
-@using SIDPSF._Resources
-@using static SIDPSF.Common.DataAccess.DBContext
-@model SIDPSF.Features.SharedMVC.BaseCrudModel
+@using UserManagement.Common
+@using UserManagement.Common.StringLocalisation
+@using UserManagement.Features
+@using UserManagement._Resources
+@using static UserManagement.Common.DataAccess.DBContext
+@model UserManagement.Features.SharedMVC.BaseCrudModel
 
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@inject SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
+@inject UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider.ResourceRepository ResourceRepo
 
 <div class="card mb-1">
     <div class="accordion" id="auditDataAccordion">

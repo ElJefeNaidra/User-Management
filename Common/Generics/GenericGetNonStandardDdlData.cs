@@ -1,4 +1,4 @@
-namespace SIDPSF.Common.Generics
+namespace UserManagement.Common.Generics
 {
     public class GenericGetNonStandardDdlData
     {

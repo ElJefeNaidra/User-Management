@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SIDPSF.Common.StringLocalisation;
-using SIDPSF.Features.SharedMVC;
+using UserManagement.Common.StringLocalisation;
+using UserManagement.Features.SharedMVC;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIDPSF.Features.CommonRegistry.Gender
+namespace UserManagement.Features.CommonRegistry.Gender
 {
     public partial class GenderModel : BaseCrudModel
     {

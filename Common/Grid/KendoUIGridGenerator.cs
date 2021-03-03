@@ -1,12 +1,12 @@
 ﻿using Kendo.Mvc.UI.Fluent;
 using Microsoft.Extensions.Caching.Memory;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.StringLocalisation;
 using System.Data;
-using SIDPSF._Resources;
+using UserManagement._Resources;
 using System.Reflection;
-using static SIDPSF.Common.Grid.KendoUIGridGenerator;
+using static UserManagement.Common.Grid.KendoUIGridGenerator;
 
-namespace SIDPSF.Common.Grid
+namespace UserManagement.Common.Grid
 {
     /// <summary>
     /// Provides extension methods to assist with the generation of Kendo UI Grid columns based on model attributes.

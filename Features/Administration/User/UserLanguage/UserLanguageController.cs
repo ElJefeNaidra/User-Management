@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using SIDPSF.Common.DataAccess;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using UserManagement.Common.DataAccess;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     public class UserLanguageController : Controller
     {

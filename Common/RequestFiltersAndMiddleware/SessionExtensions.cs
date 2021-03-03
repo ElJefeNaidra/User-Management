@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SIDPSF.Common.RequestFilters
+namespace UserManagement.Common.RequestFilters
 {
     public static class SessionExtensions
     {

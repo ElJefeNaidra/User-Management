@@ -1,7 +1,7 @@
-using SIDPSF.Common.Grid;
+using UserManagement.Common.Grid;
 using System.Data;
 
-namespace SIDPSF.Features.CommonRegistry.Language
+namespace UserManagement.Features.CommonRegistry.Language
 {
     // Implementation of Search Model for Simple no ServerOperation Grids
     public class LanguageSimpleSearchModel

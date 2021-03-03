@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Features.CommonRegistry.Settlement
+namespace UserManagement.Features.CommonRegistry.Settlement
 {
     public partial class SettlementController : Controller
     {

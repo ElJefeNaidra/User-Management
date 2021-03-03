@@ -1,10 +1,10 @@
-using SIDPSF.Common.Generics;
-using SIDPSF.Common.Grid;
-using SIDPSF.Common.StringLocalisation;
+using UserManagement.Common.Generics;
+using UserManagement.Common.Grid;
+using UserManagement.Common.StringLocalisation;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 
-namespace SIDPSF.Features.Administration.GlobalAccessTracking
+namespace UserManagement.Features.Administration.GlobalAccessTracking
 {
     // Implementation of Search Model for Simple no ServerOperation Grids
     public class GlobalAccessTrackingPagedSearchModel

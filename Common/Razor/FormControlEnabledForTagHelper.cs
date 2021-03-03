@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Reflection;
-using static SIDPSF.Common.DataAccess.DBContext;
+using static UserManagement.Common.DataAccess.DBContext;
 
-namespace SIDPSF.Common.Razor
+namespace UserManagement.Common.Razor
 {
     [HtmlTargetElement("input", Attributes = "asp-for")]
     [HtmlTargetElement("select", Attributes = "asp-for")]

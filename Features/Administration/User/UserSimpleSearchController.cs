@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SIDPSF.Common.DataAccess;
-using static SIDPSF.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
+using UserManagement.Common.DataAccess;
+using static UserManagement.Common.StringLocalisation.DatabaseResourceLocalisationProvider;
 
-namespace SIDPSF.Features.Administration.User
+namespace UserManagement.Features.Administration.User
 {
     [Parent("Administration", "Administration", "Administrimi", "Administracija")]
     [TypeFilter(typeof(RequestAuthorisationFilter))]

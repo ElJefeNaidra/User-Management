@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SIDPSF.Common.CustomDateTimeModelBinding.Core.Helpers;
+using UserManagement.Common.CustomDateTimeModelBinding.Core.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SIDPSF.Common.CustomDateTimeModelBinding.Core.ModelBinders
+namespace UserManagement.Common.CustomDateTimeModelBinding.Core.ModelBinders
 {
     public class DateTimeModelBinder : IModelBinder
     {
